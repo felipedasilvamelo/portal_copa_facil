@@ -16,15 +16,7 @@ copa-facil-portal/
 └── todo.md            # Lista de tarefas do projeto
 ```
 
-## Funcionalidades
-- ✅ Layout responsivo (mobile-first)
-- ✅ Navegação lateral fixa (desktop)
-- ✅ Barra de busca inteligente
-- ✅ Seções organizadas: Home, Como Usar, Procedimentos, Respostas Rápidas, Modelos & Formulários, Changelog
-- ✅ Accordion para procedimentos
-- ✅ Botões de copiar texto com feedback visual
-- ✅ Design com cores da marca Copa Fácil (#384355 e #50EA95)
-- ✅ Tipografia Inter/Arial
+
 
 ## Como Usar
 
@@ -66,10 +58,10 @@ copa-facil-portal/
 - Google Fonts (Inter)
 
 ## Compatibilidade
-- ✅ Chrome/Edge 90+
-- ✅ Firefox 88+
-- ✅ Safari 14+
-- ✅ Dispositivos móveis (iOS/Android)
+-  Chrome/Edge 90+
+- Firefox 88+
+- Safari 14+
+- Dispositivos móveis (iOS/Android)
 
 ## Suporte
 Para dúvidas sobre o portal, consulte a seção "Como Usar" dentro do próprio sistema ou entre em contato com a equipe de desenvolvimento.
