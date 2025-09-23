@@ -1,9 +1,10 @@
+// js/script.js
 // Portal de Procedimentos Copa Fácil - JavaScript
 
 document.addEventListener('DOMContentLoaded', function() {
     // Inicialização
     initializeNavigation();
-    initializeSearch();
+    initializeSearch(); // ✅ busca global, sempre visível; debounce + mínimo de caracteres
     initializeMobileMenu();
     initializeProcedures();
     
@@ -51,20 +52,35 @@ function navigateToSection(sectionId) {
     // Fechar menu mobile se estiver aberto
     closeMobileMenu();
     
-    // Scroll para o topo
+    // Scroll para o topo (a busca fica sempre no topo do conteúdo)
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ===== FUNCIONALIDADE DE BUSCA =====
 function initializeSearch() {
     const searchInput = document.getElementById('searchInput');
-    
-    if (searchInput) {
-        searchInput.addEventListener('input', function() {
-            const searchTerm = this.value.toLowerCase().trim();
-            performSearch(searchTerm);
-        });
-    }
+    if (!searchInput) return;
+
+    // ✅ Prevenção contra registros duplicados
+    if (searchInput.dataset.initialized === '1') return;
+    searchInput.dataset.initialized = '1';
+
+    const MIN_SEARCH_CHARS = 2;
+
+    // ✅ Um único listener, com debounce + limite mínimo de caracteres
+    const onInput = debounce((ev) => {
+        const value = (ev.target.value || '').toLowerCase().trim();
+
+        // Se menos de N caracteres, apenas esconde o painel de resultados (a barra continua visível)
+        if (value.length < MIN_SEARCH_CHARS) {
+            clearSearchResults(); // esconde painel e limpa lista/mensagem
+            return;
+        }
+
+        performSearch(value);
+    }, 300);
+
+    searchInput.addEventListener('input', onInput);
 }
 
 function performSearch(searchTerm) {
@@ -78,14 +94,18 @@ function performSearch(searchTerm) {
     // Buscar em procedimentos
     const procedures = document.querySelectorAll('.procedure-item');
     procedures.forEach(procedure => {
-        const title = procedure.querySelector('.procedure-header h3').textContent.toLowerCase();
-        const content = procedure.querySelector('.procedure-content').textContent.toLowerCase();
+        const titleEl = procedure.querySelector('.procedure-header h3');
+        const contentEl = procedure.querySelector('.procedure-content');
+        if (!titleEl || !contentEl) return;
+
+        const title = titleEl.textContent.toLowerCase();
+        const content = contentEl.textContent.toLowerCase();
         
         if (title.includes(searchTerm) || content.includes(searchTerm)) {
             searchResults.push({
                 type: 'procedure',
                 element: procedure,
-                title: procedure.querySelector('.procedure-header h3').textContent,
+                title: titleEl.textContent,
                 section: 'procedimentos'
             });
         }
@@ -94,14 +114,18 @@ function performSearch(searchTerm) {
     // Buscar em respostas rápidas
     const responses = document.querySelectorAll('.response-item');
     responses.forEach(response => {
-        const title = response.querySelector('h3').textContent.toLowerCase();
-        const content = response.querySelector('.response-content p').textContent.toLowerCase();
+        const titleEl = response.querySelector('h3');
+        const contentEl = response.querySelector('.response-content p');
+        if (!titleEl || !contentEl) return;
+
+        const title = titleEl.textContent.toLowerCase();
+        const content = contentEl.textContent.toLowerCase();
         
         if (title.includes(searchTerm) || content.includes(searchTerm)) {
             searchResults.push({
                 type: 'response',
                 element: response,
-                title: response.querySelector('h3').textContent,
+                title: titleEl.textContent,
                 section: 'respostas-rapidas'
             });
         }
@@ -110,14 +134,17 @@ function performSearch(searchTerm) {
     // Buscar em changelog
     const changelogItems = document.querySelectorAll('.changelog-item');
     changelogItems.forEach(item => {
-        const title = item.querySelector('h4').textContent.toLowerCase();
+        const titleEl = item.querySelector('h4');
+        if (!titleEl) return;
+
+        const title = titleEl.textContent.toLowerCase();
         const content = item.textContent.toLowerCase();
         
         if (title.includes(searchTerm) || content.includes(searchTerm)) {
             searchResults.push({
                 type: 'changelog',
                 element: item,
-                title: item.querySelector('h4').textContent,
+                title: titleEl.textContent,
                 section: 'changelog'
             });
         }
@@ -127,47 +154,42 @@ function performSearch(searchTerm) {
 }
 
 function displaySearchResults(results) {
-    // Remover resultados anteriores
-    clearSearchResults();
-    
+    // Limpa lista atual e garante que o painel existe e esteja visível
+    const resultsContainer = createSearchResultsContainer();
+
     if (results.length === 0) {
         showNoResults();
+        scrollResultsIntoView();
         return;
     }
-    
-    // Criar container de resultados
-    const resultsContainer = createSearchResultsContainer();
-    
+
     results.forEach(result => {
         const resultItem = createSearchResultItem(result);
         resultsContainer.appendChild(resultItem);
     });
-    
-    // Mostrar seção de resultados
-    navigateToSearchResults();
+
+    // Mostra o painel de resultados e rola até ele
+    showResultsPanel(true);
+    scrollResultsIntoView();
 }
 
 function createSearchResultsContainer() {
-    let container = document.getElementById('search-results-section');
-    
-    if (!container) {
-        container = document.createElement('section');
-        container.id = 'search-results-section';
-        container.className = 'section';
-        container.innerHTML = `
-            <h2>Resultados da Busca</h2>
-            <div id="search-results-list"></div>
-        `;
-        document.querySelector('.content').appendChild(container);
-    }
-    
+    // ✅ Agora o painel é global e fixo no topo do conteúdo (HTML já inclui #global-results)
+    const container = document.getElementById('global-results');
+    if (!container) return document.createElement('div');
+
     const resultsList = container.querySelector('#search-results-list');
-    resultsList.innerHTML = '';
-    
-    return resultsList;
+    if (resultsList) resultsList.innerHTML = '';
+
+    // Garante que o título “Resultados da Busca” esteja visível (o CSS/HTML já lidam com isso)
+    return resultsList || container;
 }
 
 function createSearchResultItem(result) {
+    // ✅ Gera identificador seguro para inline attribute (usa encodeURIComponent)
+    const identifierRaw = result.element.id || (result.element.querySelector('h3, h4')?.textContent || '');
+    const identifierSafe = encodeURIComponent(identifierRaw);
+
     const item = document.createElement('div');
     item.className = 'search-result-item';
     item.innerHTML = `
@@ -175,12 +197,12 @@ function createSearchResultItem(result) {
             <h3>${result.title}</h3>
             <span class="search-result-type">${getSectionName(result.section)}</span>
         </div>
-        <button class="search-result-btn" onclick="goToSearchResult('${result.section}', '${result.element.id || result.element.querySelector('h3, h4').textContent}')">
+        <button class="search-result-btn" onclick="goToSearchResult('${result.section}', '${identifierSafe}')">
             Ver detalhes
         </button>
     `;
     
-    // Adicionar estilos inline para os resultados de busca
+    // Estilo inline para compatibilidade imediata (mantido do seu padrão)
     item.style.cssText = `
         background: white;
         border: 2px solid #e2e8f0;
@@ -214,11 +236,12 @@ function getSectionName(sectionId) {
 }
 
 function goToSearchResult(section, itemIdentifier) {
+    // ✅ Mantém a barra de busca visível; apenas navega para a seção e destaca o item
     navigateToSection(section);
     
-    // Destacar o item encontrado
     setTimeout(() => {
-        const targetElement = findElementByIdentifier(section, itemIdentifier);
+        const decoded = decodeURIComponent(itemIdentifier || '');
+        const targetElement = findElementByIdentifier(section, decoded);
         if (targetElement) {
             targetElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
             highlightElement(targetElement);
@@ -231,13 +254,15 @@ function findElementByIdentifier(section, identifier) {
     if (!sectionElement) return null;
     
     // Tentar encontrar por ID
-    let element = document.getElementById(identifier);
-    if (element) return element;
+    if (identifier) {
+        const byId = document.getElementById(identifier);
+        if (byId) return byId;
+    }
     
     // Tentar encontrar por texto do título
     const titles = sectionElement.querySelectorAll('h3, h4');
     for (let title of titles) {
-        if (title.textContent.includes(identifier)) {
+        if (identifier && title.textContent.includes(identifier)) {
             return title.closest('.procedure-item, .response-item, .changelog-item');
         }
     }
@@ -254,27 +279,43 @@ function highlightElement(element) {
     }, 3000);
 }
 
-function navigateToSearchResults() {
-    navigateToSection('search-results-section');
+// ===== Resultados globais: mostrar/ocultar + scroll =====
+function showResultsPanel(show) {
+    const panel = document.getElementById('global-results');
+    if (!panel) return;
+    panel.classList.toggle('hidden', !show);
 }
 
-function clearSearchResults() {
-    const resultsSection = document.getElementById('search-results-section');
-    if (resultsSection) {
-        resultsSection.remove();
+function scrollResultsIntoView() {
+    const anchor = document.getElementById('global-search');
+    if (anchor) {
+        anchor.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 }
 
+function clearSearchResults() {
+    const panel = document.getElementById('global-results');
+    if (!panel) return;
+    const list = panel.querySelector('#search-results-list');
+    if (list) list.innerHTML = '';
+    panel.classList.add('hidden'); // esconde o painel, mantendo a barra visível
+}
+
 function showNoResults() {
-    const container = createSearchResultsContainer();
-    container.innerHTML = `
-        <div style="text-align: center; padding: 2rem; color: #64748b;">
-            <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; color: #50EA95;"></i>
-            <h3>Nenhum resultado encontrado</h3>
-            <p>Tente usar palavras-chave diferentes ou verifique a ortografia.</p>
-        </div>
-    `;
-    navigateToSearchResults();
+    const panel = document.getElementById('global-results');
+    if (!panel) return;
+
+    const list = panel.querySelector('#search-results-list');
+    if (list) {
+        list.innerHTML = `
+            <div style="text-align: center; padding: 2rem; color: #64748b;">
+                <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; color: #50EA95;"></i>
+                <h3>Nenhum resultado encontrado</h3>
+                <p>Tente usar palavras-chave diferentes ou verifique a ortografia.</p>
+            </div>
+        `;
+    }
+    showResultsPanel(true);
 }
 
 // ===== MENU MOBILE =====
@@ -324,13 +365,15 @@ function initializeProcedures() {
 
 function toggleProcedure(procedureId) {
     const content = document.getElementById(procedureId);
+    if (!content) return;
+
     const header = content.previousElementSibling;
-    const icon = header.querySelector('i');
+    const icon = header?.querySelector('i');
     
     if (content.classList.contains('active')) {
         // Fechar
         content.classList.remove('active');
-        icon.style.transform = 'rotate(0deg)';
+        if (icon) icon.style.transform = 'rotate(0deg)';
     } else {
         // Fechar todos os outros procedimentos
         const allContents = document.querySelectorAll('.procedure-content');
@@ -341,7 +384,7 @@ function toggleProcedure(procedureId) {
         
         // Abrir o selecionado
         content.classList.add('active');
-        icon.style.transform = 'rotate(180deg)';
+        if (icon) icon.style.transform = 'rotate(180deg)';
     }
 }
 
@@ -404,7 +447,7 @@ function showCopyError(button) {
 }
 
 // Função específica para copiar o template de bug
-function copyBugTemplate() {
+function copyBugTemplate(ev) {
     const template = `**Passos para reproduzir:**
 1. [Descreva o primeiro passo]
 2. [Descreva o segundo passo]
@@ -425,7 +468,8 @@ function copyBugTemplate() {
 **Prints/evidências:**
 [Anexar capturas de tela ou vídeos]`;
 
-    const button = event.target;
+    // ✅ não depende mais de event global
+    const button = ev?.currentTarget || ev?.target || document.activeElement;
     copyToClipboard(button, template);
 }
 
@@ -443,18 +487,19 @@ function debounce(func, wait) {
 }
 
 // Aplicar debounce na busca para melhor performance
-document.addEventListener('DOMContentLoaded', function() {
-    const searchInput = document.getElementById('searchInput');
-    if (searchInput) {
-        const debouncedSearch = debounce(function() {
-            const searchTerm = searchInput.value.toLowerCase().trim();
-            performSearch(searchTerm);
-        }, 300);
+// (✅ Agora o debounce já é aplicado dentro de initializeSearch; este bloco não é mais necessário.)
+// document.addEventListener('DOMContentLoaded', function() {
+//     const searchInput = document.getElementById('searchInput');
+//     if (searchInput) {
+//         const debouncedSearch = debounce(function() {
+//             const searchTerm = searchInput.value.toLowerCase().trim();
+//             performSearch(searchTerm);
+//         }, 300);
         
-        searchInput.removeEventListener('input', performSearch);
-        searchInput.addEventListener('input', debouncedSearch);
-    }
-});
+//         searchInput.removeEventListener('input', performSearch);
+//         searchInput.addEventListener('input', debouncedSearch);
+//     }
+// });
 
 // ===== ANIMAÇÕES E EFEITOS =====
 function addScrollAnimations() {
@@ -485,7 +530,7 @@ document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
         closeMobileMenu();
         
-        // Limpar busca se estiver ativa
+        // Limpar busca se estiver ativa (a barra permanece visível)
         const searchInput = document.getElementById('searchInput');
         if (searchInput && searchInput.value) {
             searchInput.value = '';
@@ -537,4 +582,3 @@ navigateToSection = function(sectionId) {
 };
 
 console.log('Portal Copa Fácil - JavaScript carregado e inicializado com sucesso!');
-

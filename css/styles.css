@@ -1,3 +1,4 @@
+/* css/styles.css */
 /* Reset e configurações básicas */
 * {
     margin: 0;
@@ -187,14 +188,18 @@ body {
     border-bottom: 3px solid var(--accent-color);
 }
 
-/* Barra de busca */
+/* ===== Busca Global ===== */
+.global-search {
+    margin-bottom: var(--spacing-xl);
+}
+
 .search-container {
-    margin-bottom: var(--spacing-2xl);
+    margin-bottom: var(--spacing-lg);
 }
 
 .search-box {
     position: relative;
-    max-width: 500px;
+    max-width: 700px; /* um pouco mais larga no topo global */
     margin: 0 auto;
 }
 
@@ -221,6 +226,43 @@ body {
     outline: none;
     border-color: var(--accent-color);
     box-shadow: 0 0 0 3px rgba(80, 234, 149, 0.1);
+}
+
+/* Painel de resultados logo abaixo da barra */
+.search-results-section {
+    background: var(--white);
+    border-radius: 12px;
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-light);
+    margin: 0 auto var(--spacing-xl);
+}
+
+.search-results-section h2 {
+    color: var(--primary-color);
+    font-size: var(--font-size-3xl);
+    font-weight: 700;
+    margin-bottom: var(--spacing-xl);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 3px solid var(--accent-color);
+}
+
+.search-result-btn {
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-size: var(--font-size-sm);
+    margin-top: var(--spacing-md);
+}
+
+.search-result-btn:hover {
+    background: var(--accent-color);
+    color: var(--primary-color);
+    transform: scale(1.03);
 }
 
 /* Cards grid */
@@ -358,7 +400,10 @@ body {
 
 /* Procedimentos */
 .procedures-container {
-    space-y: var(--spacing-lg);
+    /* Espaçamento vertical entre itens (substitui a antiga 'space-y') */
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--spacing-lg);
 }
 
 .procedure-item {
@@ -783,5 +828,23 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--primary-color);
+}
+
+/* Logo da marca no cabeçalho */
+.logo { text-decoration: none; color: inherit; } /* link sem cara de link */
+.logo .brand-logo{
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: transparent;   /* antes era #fff */
+  padding: 0;                /* remove o aro */
+  box-shadow: none;          /* remove sombra clara que parecia borda */
+  border: none;              /* garante sem borda */
+  object-fit: cover;
+  display: block;            /* evita “gap” de imagem inline */
+}
+
+@media (max-width: 768px){
+  .logo .brand-logo{ width: 48px; height: 48px; }
 }
 
