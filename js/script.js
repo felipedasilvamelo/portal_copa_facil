@@ -90,8 +90,16 @@ function performSearch(searchTerm) {
     }
     
     const searchResults = [];
+    const seen = new WeakSet(); // ✅ evita itens duplicados (ex.: finance-item + procedure-item)
+
+    function addResult(element, obj) {
+        if (!seen.has(element)) {
+            searchResults.push(obj);
+            seen.add(element);
+        }
+    }
     
-    // Buscar em procedimentos
+    // Buscar em procedimentos (e também os do Financeiro, pois usam .procedure-item)
     const procedures = document.querySelectorAll('.procedure-item');
     procedures.forEach(procedure => {
         const titleEl = procedure.querySelector('.procedure-header h3');
@@ -100,17 +108,40 @@ function performSearch(searchTerm) {
 
         const title = titleEl.textContent.toLowerCase();
         const content = contentEl.textContent.toLowerCase();
+
+        // Descobre automaticamente a seção (procedimentos/financeiro) pelo ancestral <section>
+        const containerSection = procedure.closest('section')?.id || 'procedimentos';
         
         if (title.includes(searchTerm) || content.includes(searchTerm)) {
-            searchResults.push({
-                type: 'procedure',
+            addResult(procedure, {
+                type: containerSection === 'financeiro' ? 'finance' : 'procedure',
                 element: procedure,
                 title: titleEl.textContent,
-                section: 'procedimentos'
+                section: containerSection
             });
         }
     });
     
+    // Buscar em financeiro ✅ (mantido por compatibilidade; não duplica por causa do WeakSet)
+    const finances = document.querySelectorAll('.finance-item');
+    finances.forEach(fin => {
+        const titleEl = fin.querySelector('h3');
+        const contentEl = fin.querySelector('.procedure-content, .finance-content');
+        if (!titleEl || !contentEl) return;
+
+        const title = titleEl.textContent.toLowerCase();
+        const content = contentEl.textContent.toLowerCase();
+
+        if (title.includes(searchTerm) || content.includes(searchTerm)) {
+            addResult(fin, {
+                type: 'finance',
+                element: fin,
+                title: titleEl.textContent,
+                section: 'financeiro'
+            });
+        }
+    });
+
     // Buscar em respostas rápidas
     const responses = document.querySelectorAll('.response-item');
     responses.forEach(response => {
@@ -122,7 +153,7 @@ function performSearch(searchTerm) {
         const content = contentEl.textContent.toLowerCase();
         
         if (title.includes(searchTerm) || content.includes(searchTerm)) {
-            searchResults.push({
+            addResult(response, {
                 type: 'response',
                 element: response,
                 title: titleEl.textContent,
@@ -141,7 +172,7 @@ function performSearch(searchTerm) {
         const content = item.textContent.toLowerCase();
         
         if (title.includes(searchTerm) || content.includes(searchTerm)) {
-            searchResults.push({
+            addResult(item, {
                 type: 'changelog',
                 element: item,
                 title: titleEl.textContent,
@@ -228,6 +259,7 @@ function createSearchResultItem(result) {
 function getSectionName(sectionId) {
     const sectionNames = {
         'procedimentos': 'Procedimentos',
+        'financeiro': 'Financeiro',               // ✅ mapeado
         'respostas-rapidas': 'Respostas Rápidas',
         'modelos-formularios': 'Modelos & Formulários',
         'changelog': 'Changelog'
@@ -263,7 +295,7 @@ function findElementByIdentifier(section, identifier) {
     const titles = sectionElement.querySelectorAll('h3, h4');
     for (let title of titles) {
         if (identifier && title.textContent.includes(identifier)) {
-            return title.closest('.procedure-item, .response-item, .changelog-item');
+            return title.closest('.procedure-item, .response-item, .finance-item, .changelog-item'); // ✅ inclui finance-item
         }
     }
     
@@ -517,7 +549,7 @@ function addScrollAnimations() {
     }, observerOptions);
     
     // Observar elementos que devem ter animação
-    const animatedElements = document.querySelectorAll('.card, .rule-item, .procedure-item, .response-item, .changelog-item');
+    const animatedElements = document.querySelectorAll('.card, .rule-item, .procedure-item, .response-item, .finance-item, .changelog-item'); // ✅ inclui finance-item
     animatedElements.forEach(el => observer.observe(el));
 }
 

@@ -848,3 +848,44 @@ body {
   .logo .brand-logo{ width: 48px; height: 48px; }
 }
 
+/* Financeiro */
+/* Mantido (mesmo que o Financeiro agora use o acordeão de .procedure-*)
+   para preservar suas alterações prévias e evitar regressões visuais */
+.finance-container {
+  display: grid;
+  gap: var(--spacing-lg);
+}
+
+.finance-item {
+  background: var(--white);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  padding: var(--spacing-lg);
+  transition: all var(--transition-normal);
+}
+
+.finance-item:hover {
+  border-color: var(--accent-color);
+  box-shadow: var(--shadow-medium);
+}
+
+.finance-item h3 {
+  color: var(--primary-color);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  margin-bottom: var(--spacing-md);
+}
+
+.finance-content {
+  background: var(--background-color);
+  padding: var(--spacing-lg);
+  border-radius: 8px;
+  margin-bottom: var(--spacing-md);
+  border-left: 4px solid var(--accent-color);
+}
+
+.finance-content p {
+  margin: 0;
+  color: var(--text-primary);
+  line-height: 1.6;
+}

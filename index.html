@@ -43,6 +43,8 @@
                             <li><a href="#home" class="nav-link active">Home</a></li>
                             <li><a href="#como-usar" class="nav-link">Como Usar</a></li>
                             <li><a href="#procedimentos" class="nav-link">Procedimentos</a></li>
+                            <!-- ✅ Financeiro entre Procedimentos e Respostas Rápidas -->
+                            <li><a href="#financeiro" class="nav-link">Financeiro</a></li>
                             <li><a href="#respostas-rapidas" class="nav-link">Respostas Rápidas</a></li>
                             <li><a href="#modelos-formularios" class="nav-link">Modelos & Formulários</a></li>
                             <li><a href="#changelog" class="nav-link">Changelog</a></li>
@@ -80,6 +82,16 @@
                                 <h3>Procedimentos</h3>
                                 <p>Runbooks e guias passo a passo para resolver problemas comuns</p>
                                 <button class="card-btn" onclick="navigateToSection('procedimentos')">Acessar</button>
+                            </div>
+
+                            <!-- ✅ Card Financeiro antes de Respostas Rápidas -->
+                            <div class="card" data-section="financeiro">
+                                <div class="card-icon">
+                                    <i class="fas fa-wallet"></i>
+                                </div>
+                                <h3>Financeiro</h3>
+                                <p>Boletos, comprovantes e orientações de pagamentos</p>
+                                <button class="card-btn" onclick="navigateToSection('financeiro')">Acessar</button>
                             </div>
 
                             <div class="card" data-section="respostas-rapidas">
@@ -288,6 +300,170 @@
                         </div>
                     </section>
 
+                    <!-- ✅ Financeiro (Acordeão igual aos Procedimentos) -->
+                    <section id="financeiro" class="section">
+                    <h2>Financeiro</h2>
+
+                    <!-- Mesma estrutura/estilo de acordeão -->
+                    <div class="procedures-container">
+
+                        <!-- fin1 -->
+                        <div class="procedure-item">
+                        <div class="procedure-header" data-procedure="fin1">
+                            <h3>Formas de pagamento</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="procedure-content" id="fin1">
+                            <div class="procedure-section">
+                            <h4><i class="fas fa-play-circle"></i> Quando usar</h4>
+                            <p>Quando o cliente entra em contato perguntando como pode realizar o pagamento</p>
+                            </div>
+                            <div class="procedure-section">
+                            <h4><i class="fas fa-check-circle"></i> Formas de pagamento</h4>
+                            <p><strong>Pelo aplicativo:</strong> <br>• Apenas cartão de crédito</p>
+                            <p><strong>Pelo site:</strong><br>• Cartão de crédito<br>• Boleto bancário<br>• Pix</p>
+                            <p><strong>Pelo WhatsApp, E-mail ou Telegram:</strong><br>• Boleto bancário<br>• Pix<br>• Chave pix: contato@copafacil.com</p>
+                            </div>
+                            <div class="procedure-section">
+                            <h4><i class="fas fa-exclamation-triangle"></i> Escalar se...</h4>
+                            <p>• Acontecer qualquer problema com o pagamento ou <strong>com a geração do boleto</strong></p>
+                            </div>
+                            <div class="procedure-section">
+                            <h4><i class="fas fa-comment"></i> Sugestão de mensagem ao cliente</h4>
+                            <div class="message-box">
+                                "Você pode realizar o pagamento diretamente no nosso aplicativo com cartão de crédito ou, se preferir, pelo site, onde oferecemos as opções de cartão de crédito, boleto bancário e Pix.<br>Se for mais conveniente, posso também ativar a assinatura aqui com você via Pix."
+                            </div>
+                            </div>
+                            <div class="procedure-footer">
+                            <p><strong>Responsável:</strong> Felipe | <strong>Última revisão:</strong> 24/09/2025</p>
+                            </div>
+                        </div>
+                        </div>
+
+                        <!-- fin2 -->
+                        <div class="procedure-item">
+                        <div class="procedure-header" data-procedure="fin2">
+                            <h3>Gerar boleto bancário</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="procedure-content" id="fin2">
+                            <div class="procedure-section">
+                            <h4><i class="fas fa-play-circle"></i> Quando usar</h4>
+                            <p>Quando o cliente entra em contato solicitando um boleto bancário para pagamento.</p>
+                            </div>
+                            <div class="procedure-section">
+                            <h4><i class="fas fa-check-circle"></i> Pré-requisitos</h4>
+                            <p>• Acesso a conta bancária da empresa<br>• Dados do cliente:<br>• Nome completo<br>• CPF/CNPJ<br>• CEP<br>• Endereço</p>
+                            </div>
+                            <div class="procedure-section">
+                            <h4><i class="fas fa-list-ol"></i> Passos</h4>
+                            <ol>
+                                <li>Acesse <strong>A conta bancária da empresa</strong> → <strong>Cobrar ou Receber</strong> → <strong>Nova Cobrança</strong>.</li>
+                                <li>Selecionar cliente/Cadastrar Cliente.</li>
+                                <li>Coloque o CPF/CNPJ <strong>Dentro da lupa para pesquisar</strong> e confirme.</li>
+                                <li>Após adicionar os dados e gerar o boleto bancário, faça download e envie para o cliente.</li>
+                            </ol>
+                            </div>
+                            <div class="procedure-section">
+                            <h4><i class="fas fa-exclamation-triangle"></i> Escalar se...</h4>
+                            <p>• O botão de Nova Cobrança não estiver disponível<br>• Erro ao gerar o boleto<br>• Dados do boleto divergirem do que foi informado</p>
+                            </div>
+                            <div class="procedure-section">
+                            <h4><i class="fas fa-comment"></i> Sugestão de mensagem ao cliente</h4>
+                            <div class="message-box">
+                                "Prontinho! Aqui está o seu boleto para pagamento. Qualquer dúvida, fico à disposição."
+                            </div>
+                            </div>
+                            <div class="procedure-footer">
+                            <p><strong>Responsável:</strong> Felipe | <strong>Última revisão:</strong> 24/09/2025</p>
+                            </div>
+                        </div>
+                        </div>
+
+                        <!-- fin3 -->
+                        <div class="procedure-item">
+                        <div class="procedure-header" data-procedure="fin3">
+                            <h3>Comprovante não reconhecido</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="procedure-content" id="fin3">
+                            <div class="procedure-section">
+                            <h4><i class="fas fa-play-circle"></i> Quando usar</h4>
+                            <p>Cliente enviou comprovante, mas o sistema não compensou ou não localizou o pagamento.</p>
+                            </div>
+                            <div class="procedure-section">
+                            <h4><i class="fas fa-check-circle"></i> Pré-requisitos</h4>
+                            <p>• Comprovante em mãos<br>• Código de barras do boleto</p>
+                            </div>
+                            <div class="procedure-section">
+                            <h4><i class="fas fa-list-ol"></i> Passos</h4>
+                            <ol>
+                                <li>Confirme a <strong>data</strong> e o <strong>valor</strong> do comprovante.</li>
+                                <li>Valide o código de barras e status no módulo financeiro.</li>
+                                <li>Se constar pago, libere o acesso manualmente e ajuste o status.</li>
+                                <li>Se não constar, oriente aguardar até <strong>3 dias úteis</strong> ou abra ticket.</li>
+                            </ol>
+                            </div>
+                            <div class="procedure-section">
+                            <h4><i class="fas fa-exclamation-triangle"></i> Escalar se...</h4>
+                            <p>• Após 5 dias úteis ainda não constar<br>• Divergências no comprovante<br>• Erro ao atualizar status</p>
+                            </div>
+                            <div class="procedure-section">
+                            <h4><i class="fas fa-comment"></i> Mensagem ao cliente</h4>
+                            <div class="message-box">
+                                "Conferi seu comprovante, obrigado! Já estamos tratando e te retorno em breve. Se houver qualquer novidade no sistema, te aviso."
+                            </div>
+                            </div>
+                            <div class="procedure-footer">
+                            <p><strong>Responsável:</strong> Equipe Financeira | <strong>Última revisão:</strong> 20/01/2024</p>
+                            </div>
+                        </div>
+                        </div>
+
+                        <!-- fin4 -->
+                        <div class="procedure-item">
+                        <div class="procedure-header" data-procedure="fin4">
+                            <h3>Cancelar pagamento (boleto)</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="procedure-content" id="fin4">
+                            <div class="procedure-section">
+                            <h4><i class="fas fa-play-circle"></i> Quando usar</h4>
+                            <p>Solicitação de cancelamento antes da compensação ou em caso de erro de emissão.</p>
+                            </div>
+                            <div class="procedure-section">
+                            <h4><i class="fas fa-check-circle"></i> Pré-requisitos</h4>
+                            <p>• Confirmação do solicitante (organizador)<br>• Motivo do cancelamento</p>
+                            </div>
+                            <div class="procedure-section">
+                            <h4><i class="fas fa-list-ol"></i> Passos</h4>
+                            <ol>
+                                <li>Acesse o boleto em <strong>Financeiro → Boletos</strong>.</li>
+                                <li>Verifique se ainda está <strong>não compensado</strong>.</li>
+                                <li>Clique em <strong>Cancelar</strong> e registre a justificativa.</li>
+                                <li>Envie confirmação ao cliente.</li>
+                            </ol>
+                            </div>
+                            <div class="procedure-section">
+                            <h4><i class="fas fa-exclamation-triangle"></i> Escalar se...</h4>
+                            <p>• Boleto já compensado<br>• Inconsistência de status no gateway<br>• Travamento ao salvar</p>
+                            </div>
+                            <div class="procedure-section">
+                            <h4><i class="fas fa-comment"></i> Mensagem ao cliente</h4>
+                            <div class="message-box">
+                                "Cancelamento realizado conforme solicitado. Caso precise emitir um novo boleto, posso gerar para você."
+                            </div>
+                            </div>
+                            <div class="procedure-footer">
+                            <p><strong>Responsável:</strong> Equipe Financeira | <strong>Última revisão:</strong> 20/01/2024</p>
+                            </div>
+                        </div>
+                        </div>
+
+                    </div>
+                    </section>
+
+
                     <!-- Respostas Rápidas Section -->
                     <section id="respostas-rapidas" class="section">
                         <h2>Respostas Rápidas (WhatsApp)</h2>
@@ -297,9 +473,9 @@
                             <div class="response-item">
                                 <h3>Saudação</h3>
                                 <div class="response-content">
-                                    <p>Olá! Sou da equipe de suporte da Copa Fácil. Como posso ajudá-lo hoje?</p>
+                                    <p>Olá! Sou da equipe de suporte do Copa Fácil. Como posso ajudá-lo hoje?</p>
                                 </div>
-                                <button class="copy-btn" onclick="copyToClipboard(this, 'Olá! Sou da equipe de suporte da Copa Fácil. Como posso ajudá-lo hoje?')">
+                                <button class="copy-btn" onclick="copyToClipboard(this, 'Olá! Sou da equipe de suporte do Copa Fácil. Como posso ajudá-lo hoje?')">
                                     <i class="fas fa-copy"></i> Copiar
                                 </button>
                             </div>
@@ -307,9 +483,9 @@
                             <div class="response-item">
                                 <h3>Solicitar dados/link do campeonato</h3>
                                 <div class="response-content">
-                                    <p>Para que eu possa ajudá-lo melhor, você poderia me enviar o link do seu campeonato ou me informar o nome exato dele?</p>
+                                    <p>Poderia me encaminhar o link do seu campeonato para que eu consiga consultar no sistema, por gentileza? 👨🏻‍💻</p>
                                 </div>
-                                <button class="copy-btn" onclick="copyToClipboard(this, 'Para que eu possa ajudá-lo melhor, você poderia me enviar o link do seu campeonato ou me informar o nome exato dele?')">
+                                <button class="copy-btn" onclick="copyToClipboard(this, 'Poderia me encaminhar o link do seu campeonato para que eu consiga consultar no sistema, por gentileza? 👨🏻‍💻')">
                                     <i class="fas fa-copy"></i> Copiar
                                 </button>
                             </div>
@@ -327,9 +503,9 @@
                             <div class="response-item">
                                 <h3>Abertura de ticket</h3>
                                 <div class="response-content">
-                                    <p>Obrigado pelas informações! Vou abrir um ticket para análise técnica e retorno em breve com uma solução.</p>
+                                    <p>Obrigado pelas informações! Vou abrir um ticket para análise técnica e entrarei em contato assim que for resolvido.</p>
                                 </div>
-                                <button class="copy-btn" onclick="copyToClipboard(this, 'Obrigado pelas informações! Vou abrir um ticket para análise técnica e retorno em breve com uma solução.')">
+                                <button class="copy-btn" onclick="copyToClipboard(this, 'Obrigado pelas informações! Vou abrir um ticket para análise técnica e entrarei em contato assim que for resolvido.')">
                                     <i class="fas fa-copy"></i> Copiar
                                 </button>
                             </div>
