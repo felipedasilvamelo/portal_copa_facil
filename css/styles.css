@@ -511,6 +511,8 @@ body {
     color: var(--text-secondary);
 }
 
+
+
 /* Respostas rápidas */
 .quick-responses {
     display: grid;

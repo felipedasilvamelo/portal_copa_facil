@@ -1,643 +1,559 @@
-<!-- index.html.. -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal de Procedimentos - Copa Fácil</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portal de Procedimentos - Copa Fácil</title>
+  <link rel="stylesheet" href="css/styles.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
 </head>
 <body>
-   <!-- Header -->
-<header class="header">
-  <div class="container">
-    <div class="header-content">
-      <a href="#home" class="logo" aria-label="Ir para Home">
-        <img
-          src="assets\image.png"
-          alt="Logo da Copa Fácil"
-          class="brand-logo"
-          width="56"
-          height="56"
-          loading="lazy"
-          decoding="async"
-        />
-        <h1>Portal de Procedimentos – Copa Fácil</h1>
-      </a>
-      <p class="tagline">Processo claro. Time forte. Cliente feliz.</p>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-content">
+        <a href="#home" class="logo" aria-label="Ir para Home">
+          <img src="assets/image.png" alt="Logo da Copa Fácil" class="brand-logo" width="56" height="56" loading="lazy" decoding="async"/>
+          <h1>Portal de Procedimentos – Copa Fácil</h1>
+        </a>
+        <p class="tagline">Processo claro. Time forte. Cliente feliz.</p>
+      </div>
     </div>
-  </div>
-</header>
+  </header>
 
-    <!-- Main Content -->
-    <main class="main">
-        <div class="container">
-            <div class="layout">
-                <!-- Sidebar (Desktop) -->
-                <aside class="sidebar" id="sidebar">
-                    <nav class="sidebar-nav">
-                        <h3>Navegação</h3>
-                        <ul>
-                            <li><a href="#home" class="nav-link active">Home</a></li>
-                            <li><a href="#como-usar" class="nav-link">Como Usar</a></li>
-                            <li><a href="#procedimentos" class="nav-link">Procedimentos</a></li>
-                            <!-- ✅ Financeiro entre Procedimentos e Respostas Rápidas -->
-                            <li><a href="#financeiro" class="nav-link">Financeiro</a></li>
-                            <li><a href="#respostas-rapidas" class="nav-link">Respostas Rápidas</a></li>
-                            <li><a href="#modelos-formularios" class="nav-link">Modelos & Formulários</a></li>
-                            <li><a href="#changelog" class="nav-link">Changelog</a></li>
-                        </ul>
-                    </nav>
-                </aside>
+  <!-- Main Content -->
+  <main class="main">
+    <div class="container">
+      <div class="layout">
+        <!-- Sidebar (Desktop) -->
+        <aside class="sidebar" id="sidebar">
+          <nav class="sidebar-nav">
+            <h3>Navegação</h3>
+            <ul>
+              <li><a href="#home" class="nav-link active">Home</a></li>
+              <li><a href="#como-usar" class="nav-link">Como Usar</a></li>
+              <li><a href="#procedimentos" class="nav-link">Procedimentos</a></li>
+              <li><a href="#financeiro" class="nav-link">Financeiro</a></li>
+              <li><a href="#respostas-rapidas" class="nav-link">Respostas Rápidas</a></li>
+              <li><a href="#modelos-formularios" class="nav-link">Modelos & Formulários</a></li>
+              <li><a href="#changelog" class="nav-link">Changelog</a></li>
+            </ul>
+          </nav>
+        </aside>
 
-                <!-- Content Area -->
-                <div class="content">
+        <!-- Content Area -->
+        <div class="content">
 
-                    <!-- ✅ Busca Global (sempre visível) -->
-                    <div id="global-search" class="global-search">
-                        <div class="search-container">
-                            <div class="search-box">
-                                <i class="fas fa-search"></i>
-                                <input type="text" id="searchInput" placeholder="Buscar procedimentos, respostas ou conteúdo...">
-                            </div>
-                        </div>
-
-                        <!-- ✅ Painel de Resultados (aparece logo abaixo da barra) -->
-                        <section id="global-results" class="search-results-section hidden">
-                            <h2>Resultados da Busca</h2>
-                            <div id="search-results-list"></div>
-                        </section>
-                    </div>
-
-                    <!-- Home Section -->
-                    <section id="home" class="section active">
-                        <!-- A busca global já está acima; a Home fica limpa -->
-                        <div class="cards-grid">
-                            <div class="card" data-section="procedimentos">
-                                <div class="card-icon">
-                                    <i class="fas fa-list-check"></i>
-                                </div>
-                                <h3>Procedimentos</h3>
-                                <p>Runbooks e guias passo a passo para resolver problemas comuns</p>
-                                <button class="card-btn" onclick="navigateToSection('procedimentos')">Acessar</button>
-                            </div>
-
-                            <!-- ✅ Card Financeiro antes de Respostas Rápidas -->
-                            <div class="card" data-section="financeiro">
-                                <div class="card-icon">
-                                    <i class="fas fa-wallet"></i>
-                                </div>
-                                <h3>Financeiro</h3>
-                                <p>Boletos, comprovantes e orientações de pagamentos</p>
-                                <button class="card-btn" onclick="navigateToSection('financeiro')">Acessar</button>
-                            </div>
-
-                            <div class="card" data-section="respostas-rapidas">
-                                <div class="card-icon">
-                                    <i class="fas fa-comments"></i>
-                                </div>
-                                <h3>Respostas Rápidas</h3>
-                                <p>Mensagens prontas para WhatsApp e atendimento ao cliente</p>
-                                <button class="card-btn" onclick="navigateToSection('respostas-rapidas')">Acessar</button>
-                            </div>
-
-                            <div class="card" data-section="modelos-formularios">
-                                <div class="card-icon">
-                                    <i class="fas fa-file-alt"></i>
-                                </div>
-                                <h3>Modelos & Formulários</h3>
-                                <p>Templates e formulários para abertura de bugs e relatórios</p>
-                                <button class="card-btn" onclick="navigateToSection('modelos-formularios')">Acessar</button>
-                            </div>
-
-                            <div class="card" data-section="changelog">
-                                <div class="card-icon">
-                                    <i class="fas fa-history"></i>
-                                </div>
-                                <h3>Changelog</h3>
-                                <p>Histórico de mudanças e atualizações do sistema</p>
-                                <button class="card-btn" onclick="navigateToSection('changelog')">Acessar</button>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Como Usar Section -->
-                    <section id="como-usar" class="section">
-                        <h2>Como Usar / Regras de Ouro</h2>
-                        
-                        <div class="info-box">
-                            <h3>Como Navegar</h3>
-                            <p>Na esquerda, selecione o assunto desejado. Use a barra de busca para encontrar rapidamente procedimentos específicos.</p>
-                        </div>
-
-                        <div class="rules-container">
-                            <h3>Regras de Ouro do Atendimento</h3>
-                            <div class="rules-grid">
-                                <div class="rule-item">
-                                    <i class="fas fa-heart"></i>
-                                    <h4>Empatia</h4>
-                                    <p>Coloque-se no lugar do cliente e demonstre compreensão</p>
-                                </div>
-                                <div class="rule-item">
-                                    <i class="fas fa-graduation-cap"></i>
-                                    <h4>Educação</h4>
-                                    <p>Mantenha sempre um tom respeitoso e profissional</p>
-                                </div>
-                                <div class="rule-item">
-                                    <i class="fas fa-clock"></i>
-                                    <h4>Paciência</h4>
-                                    <p>Dedique o tempo necessário para resolver o problema</p>
-                                </div>
-                                <div class="rule-item">
-                                    <i class="fas fa-search"></i>
-                                    <h4>Coletar Dados</h4>
-                                    <p>Sempre colete informações completas antes de agir</p>
-                                </div>
-                                <div class="rule-item">
-                                    <i class="fas fa-arrow-up"></i>
-                                    <h4>Seguir Procedimento</h4>
-                                    <p>Siga os procedimentos estabelecidos e escale quando necessário</p>
-                                </div>
-                                <div class="rule-item">
-                                    <i class="fas fa-lightbulb"></i>
-                                    <h4>Aprender</h4>
-                                    <p>Sempre busque aprender e manter o conhecimento atualizado</p>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Procedimentos Section -->
-                    <section id="procedimentos" class="section">
-                        <h2>Procedimentos (Runbooks)</h2>
-                        
-                        <!-- EDITAR AQUI: Adicione novos procedimentos na lista abaixo -->
-                        <div class="procedures-container">
-                            <!-- Procedimento 1: Recalcular tabela sem mexer na 1ª rodada -->
-                            <div class="procedure-item">
-                                <div class="procedure-header" data-procedure="proc1">
-                                    <h3>Recalcular tabela sem mexer na 1ª rodada</h3>
-                                    <i class="fas fa-chevron-down"></i>
-                                </div>
-                                <div class="procedure-content" id="proc1">
-                                    <div class="procedure-section">
-                                        <h4><i class="fas fa-play-circle"></i> Quando usar</h4>
-                                        <p>Quando o cliente solicita recálculo da tabela mas já iniciou a primeira rodada e não pode ser alterada.</p>
-                                    </div>
-                                    <div class="procedure-section">
-                                        <h4><i class="fas fa-check-circle"></i> Pré-requisitos</h4>
-                                        <p>• Acesso ao painel administrativo<br>• Confirmação de que a 1ª rodada já foi iniciada<br>• Backup da tabela atual</p>
-                                    </div>
-                                    <div class="procedure-section">
-                                        <h4><i class="fas fa-list-ol"></i> Passos</h4>
-                                        <ol>
-                                            <li>Acesse o painel administrativo do campeonato</li>
-                                            <li>Vá em "Configurações" > "Tabela" > "Recalcular"</li>
-                                            <li>Marque a opção "Preservar 1ª rodada"</li>
-                                            <li>Clique em "Recalcular tabela"</li>
-                                            <li>Confirme a operação e aguarde o processamento</li>
-                                        </ol>
-                                    </div>
-                                    <div class="procedure-section">
-                                        <h4><i class="fas fa-exclamation-triangle"></i> Escalar se...</h4>
-                                        <p>• Erro durante o recálculo<br>• Cliente reporta inconsistências após o processo<br>• Processo demora mais de 10 minutos</p>
-                                    </div>
-                                    <div class="procedure-section">
-                                        <h4><i class="fas fa-comment"></i> Mensagem ao cliente</h4>
-                                        <div class="message-box">
-                                            "Olá! Realizei o recálculo da tabela preservando a 1ª rodada conforme solicitado. Por favor, verifique se está tudo correto e me informe caso encontre alguma inconsistência."
-                                        </div>
-                                    </div>
-                                    <div class="procedure-footer">
-                                        <p><strong>Responsável:</strong> Equipe de Suporte | <strong>Última revisão:</strong> 15/01/2024</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Procedimento 2: Recuperar equipe removida -->
-                            <div class="procedure-item">
-                                <div class="procedure-header" data-procedure="proc2">
-                                    <h3>Recuperar equipe removida</h3>
-                                    <i class="fas fa-chevron-down"></i>
-                                </div>
-                                <div class="procedure-content" id="proc2">
-                                    <div class="procedure-section">
-                                        <h4><i class="fas fa-play-circle"></i> Quando usar</h4>
-                                        <p>Quando uma equipe foi removida acidentalmente do campeonato e precisa ser restaurada.</p>
-                                    </div>
-                                    <div class="procedure-section">
-                                        <h4><i class="fas fa-check-circle"></i> Pré-requisitos</h4>
-                                        <p>• Acesso ao painel administrativo<br>• Nome da equipe removida<br>• Confirmação do organizador</p>
-                                    </div>
-                                    <div class="procedure-section">
-                                        <h4><i class="fas fa-list-ol"></i> Passos</h4>
-                                        <ol>
-                                            <li>Acesse "Equipes" > "Equipes removidas"</li>
-                                            <li>Localize a equipe na lista de removidas</li>
-                                            <li>Clique em "Restaurar equipe"</li>
-                                            <li>Confirme a posição na tabela (se aplicável)</li>
-                                            <li>Verifique se os jogos foram restaurados corretamente</li>
-                                        </ol>
-                                    </div>
-                                    <div class="procedure-section">
-                                        <h4><i class="fas fa-exclamation-triangle"></i> Escalar se...</h4>
-                                        <p>• Equipe não aparece na lista de removidas<br>• Erro ao restaurar<br>• Jogos não são restaurados corretamente</p>
-                                    </div>
-                                    <div class="procedure-section">
-                                        <h4><i class="fas fa-comment"></i> Mensagem ao cliente</h4>
-                                        <div class="message-box">
-                                            "Equipe restaurada com sucesso! Verifique se todos os jogos e pontuações estão corretos. Qualquer inconsistência, me informe imediatamente."
-                                        </div>
-                                    </div>
-                                    <div class="procedure-footer">
-                                        <p><strong>Responsável:</strong> Equipe de Suporte | <strong>Última revisão:</strong> 12/01/2024</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Procedimento 3: Boleto não compensou -->
-                            <div class="procedure-item">
-                                <div class="procedure-header" data-procedure="proc3">
-                                    <h3>Boleto não compensou</h3>
-                                    <i class="fas fa-chevron-down"></i>
-                                </div>
-                                <div class="procedure-content" id="proc3">
-                                    <div class="procedure-section">
-                                        <h4><i class="fas fa-play-circle"></i> Quando usar</h4>
-                                        <p>Quando o cliente informa que pagou o boleto mas o sistema não reconheceu o pagamento.</p>
-                                    </div>
-                                    <div class="procedure-section">
-                                        <h4><i class="fas fa-check-circle"></i> Pré-requisitos</h4>
-                                        <p>• Comprovante de pagamento do cliente<br>• Código de barras do boleto<br>• Acesso ao sistema financeiro</p>
-                                    </div>
-                                    <div class="procedure-section">
-                                        <h4><i class="fas fa-list-ol"></i> Passos</h4>
-                                        <ol>
-                                            <li>Solicite o comprovante de pagamento</li>
-                                            <li>Verifique a data de pagamento (até 3 dias úteis)</li>
-                                            <li>Consulte o status no sistema financeiro</li>
-                                            <li>Se confirmado, libere manualmente o acesso</li>
-                                            <li>Atualize o status do pagamento no sistema</li>
-                                        </ol>
-                                    </div>
-                                    <div class="procedure-section">
-                                        <h4><i class="fas fa-exclamation-triangle"></i> Escalar se...</h4>
-                                        <p>• Pagamento não consta no sistema após 5 dias úteis<br>• Comprovante apresenta inconsistências<br>• Sistema não permite liberação manual</p>
-                                    </div>
-                                    <div class="procedure-section">
-                                        <h4><i class="fas fa-comment"></i> Mensagem ao cliente</h4>
-                                        <div class="message-box">
-                                            "Pagamento confirmado e liberado! Seu acesso já está ativo. Obrigado pela paciência e por escolher a Copa Fácil."
-                                        </div>
-                                    </div>
-                                    <div class="procedure-footer">
-                                        <p><strong>Responsável:</strong> Equipe Financeira | <strong>Última revisão:</strong> 10/01/2024</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- ✅ Financeiro (Acordeão igual aos Procedimentos) -->
-                    <section id="financeiro" class="section">
-                    <h2>Financeiro</h2>
-
-                    <!-- Mesma estrutura/estilo de acordeão -->
-                    <div class="procedures-container">
-
-                        <!-- fin1 -->
-                        <div class="procedure-item">
-                        <div class="procedure-header" data-procedure="fin1">
-                            <h3>Formas de pagamento</h3>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="procedure-content" id="fin1">
-                            <div class="procedure-section">
-                            <h4><i class="fas fa-play-circle"></i> Quando usar</h4>
-                            <p>Quando o cliente entra em contato perguntando como pode realizar o pagamento</p>
-                            </div>
-                            <div class="procedure-section">
-                            <h4><i class="fas fa-check-circle"></i> Formas de pagamento</h4>
-                            <p><strong>Pelo aplicativo:</strong> <br>• Apenas cartão de crédito</p>
-                            <p><strong>Pelo site:</strong><br>• Cartão de crédito<br>• Boleto bancário<br>• Pix</p>
-                            <p><strong>Pelo WhatsApp, E-mail ou Telegram:</strong><br>• Boleto bancário<br>• Pix<br>• Chave pix: contato@copafacil.com</p>
-                            </div>
-                            <div class="procedure-section">
-                            <h4><i class="fas fa-exclamation-triangle"></i> Escalar se...</h4>
-                            <p>• Acontecer qualquer problema com o pagamento ou <strong>com a geração do boleto</strong></p>
-                            </div>
-                            <div class="procedure-section">
-                            <h4><i class="fas fa-comment"></i> Sugestão de mensagem ao cliente</h4>
-                            <div class="message-box">
-                                "Você pode realizar o pagamento diretamente no nosso aplicativo com cartão de crédito ou, se preferir, pelo site, onde oferecemos as opções de cartão de crédito, boleto bancário e Pix.<br>Se for mais conveniente, posso também ativar a assinatura aqui com você via Pix."
-                            </div>
-                            </div>
-                            <div class="procedure-footer">
-                            <p><strong>Responsável:</strong> Felipe | <strong>Última revisão:</strong> 24/09/2025</p>
-                            </div>
-                        </div>
-                        </div>
-
-                        <!-- fin2 -->
-                        <div class="procedure-item">
-                        <div class="procedure-header" data-procedure="fin2">
-                            <h3>Gerar boleto bancário</h3>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="procedure-content" id="fin2">
-                            <div class="procedure-section">
-                            <h4><i class="fas fa-play-circle"></i> Quando usar</h4>
-                            <p>Quando o cliente entra em contato solicitando um boleto bancário para pagamento.</p>
-                            </div>
-                            <div class="procedure-section">
-                            <h4><i class="fas fa-check-circle"></i> Pré-requisitos</h4>
-                            <p>• Acesso a conta bancária da empresa<br>• Dados do cliente:<br>• Nome completo<br>• CPF/CNPJ<br>• CEP<br>• Endereço</p>
-                            </div>
-                            <div class="procedure-section">
-                            <h4><i class="fas fa-list-ol"></i> Passos</h4>
-                            <ol>
-                                <li>Acesse <strong>A conta bancária da empresa</strong> → <strong>Cobrar ou Receber</strong> → <strong>Nova Cobrança</strong>.</li>
-                                <li>Selecionar cliente/Cadastrar Cliente.</li>
-                                <li>Coloque o CPF/CNPJ <strong>Dentro da lupa para pesquisar</strong> e confirme.</li>
-                                <li>Após adicionar os dados e gerar o boleto bancário, faça download e envie para o cliente.</li>
-                            </ol>
-                            </div>
-                            <div class="procedure-section">
-                            <h4><i class="fas fa-exclamation-triangle"></i> Escalar se...</h4>
-                            <p>• O botão de Nova Cobrança não estiver disponível<br>• Erro ao gerar o boleto<br>• Dados do boleto divergirem do que foi informado</p>
-                            </div>
-                            <div class="procedure-section">
-                            <h4><i class="fas fa-comment"></i> Sugestão de mensagem ao cliente</h4>
-                            <div class="message-box">
-                                "Prontinho! Aqui está o seu boleto para pagamento. Qualquer dúvida, fico à disposição."
-                            </div>
-                            </div>
-                            <div class="procedure-footer">
-                            <p><strong>Responsável:</strong> Felipe | <strong>Última revisão:</strong> 24/09/2025</p>
-                            </div>
-                        </div>
-                        </div>
-
-                        <!-- fin3 -->
-                        <div class="procedure-item">
-                        <div class="procedure-header" data-procedure="fin3">
-                            <h3>Comprovante não reconhecido</h3>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="procedure-content" id="fin3">
-                            <div class="procedure-section">
-                            <h4><i class="fas fa-play-circle"></i> Quando usar</h4>
-                            <p>Cliente enviou comprovante, mas o sistema não compensou ou não localizou o pagamento.</p>
-                            </div>
-                            <div class="procedure-section">
-                            <h4><i class="fas fa-check-circle"></i> Pré-requisitos</h4>
-                            <p>• Comprovante em mãos<br>• Código de barras do boleto</p>
-                            </div>
-                            <div class="procedure-section">
-                            <h4><i class="fas fa-list-ol"></i> Passos</h4>
-                            <ol>
-                                <li>Confirme a <strong>data</strong> e o <strong>valor</strong> do comprovante.</li>
-                                <li>Valide o código de barras e status no módulo financeiro.</li>
-                                <li>Se constar pago, libere o acesso manualmente e ajuste o status.</li>
-                                <li>Se não constar, oriente aguardar até <strong>3 dias úteis</strong> ou abra ticket.</li>
-                            </ol>
-                            </div>
-                            <div class="procedure-section">
-                            <h4><i class="fas fa-exclamation-triangle"></i> Escalar se...</h4>
-                            <p>• Após 5 dias úteis ainda não constar<br>• Divergências no comprovante<br>• Erro ao atualizar status</p>
-                            </div>
-                            <div class="procedure-section">
-                            <h4><i class="fas fa-comment"></i> Mensagem ao cliente</h4>
-                            <div class="message-box">
-                                "Conferi seu comprovante, obrigado! Já estamos tratando e te retorno em breve. Se houver qualquer novidade no sistema, te aviso."
-                            </div>
-                            </div>
-                            <div class="procedure-footer">
-                            <p><strong>Responsável:</strong> Equipe Financeira | <strong>Última revisão:</strong> 20/01/2024</p>
-                            </div>
-                        </div>
-                        </div>
-
-                        <!-- fin4 -->
-                        <div class="procedure-item">
-                        <div class="procedure-header" data-procedure="fin4">
-                            <h3>Cancelar pagamento (boleto)</h3>
-                            <i class="fas fa-chevron-down"></i>
-                        </div>
-                        <div class="procedure-content" id="fin4">
-                            <div class="procedure-section">
-                            <h4><i class="fas fa-play-circle"></i> Quando usar</h4>
-                            <p>Solicitação de cancelamento antes da compensação ou em caso de erro de emissão.</p>
-                            </div>
-                            <div class="procedure-section">
-                            <h4><i class="fas fa-check-circle"></i> Pré-requisitos</h4>
-                            <p>• Confirmação do solicitante (organizador)<br>• Motivo do cancelamento</p>
-                            </div>
-                            <div class="procedure-section">
-                            <h4><i class="fas fa-list-ol"></i> Passos</h4>
-                            <ol>
-                                <li>Acesse o boleto em <strong>Financeiro → Boletos</strong>.</li>
-                                <li>Verifique se ainda está <strong>não compensado</strong>.</li>
-                                <li>Clique em <strong>Cancelar</strong> e registre a justificativa.</li>
-                                <li>Envie confirmação ao cliente.</li>
-                            </ol>
-                            </div>
-                            <div class="procedure-section">
-                            <h4><i class="fas fa-exclamation-triangle"></i> Escalar se...</h4>
-                            <p>• Boleto já compensado<br>• Inconsistência de status no gateway<br>• Travamento ao salvar</p>
-                            </div>
-                            <div class="procedure-section">
-                            <h4><i class="fas fa-comment"></i> Mensagem ao cliente</h4>
-                            <div class="message-box">
-                                "Cancelamento realizado conforme solicitado. Caso precise emitir um novo boleto, posso gerar para você."
-                            </div>
-                            </div>
-                            <div class="procedure-footer">
-                            <p><strong>Responsável:</strong> Equipe Financeira | <strong>Última revisão:</strong> 20/01/2024</p>
-                            </div>
-                        </div>
-                        </div>
-
-                    </div>
-                    </section>
-
-
-                    <!-- Respostas Rápidas Section -->
-                    <section id="respostas-rapidas" class="section">
-                        <h2>Respostas Rápidas (WhatsApp)</h2>
-                        
-                        <!-- EDITAR AQUI: Adicione novas respostas rápidas na lista abaixo -->
-                        <div class="quick-responses">
-                            <div class="response-item">
-                                <h3>Saudação</h3>
-                                <div class="response-content">
-                                    <p>Olá! Sou da equipe de suporte do Copa Fácil. Como posso ajudá-lo hoje?</p>
-                                </div>
-                                <button class="copy-btn" onclick="copyToClipboard(this, 'Olá! Sou da equipe de suporte do Copa Fácil. Como posso ajudá-lo hoje?')">
-                                    <i class="fas fa-copy"></i> Copiar
-                                </button>
-                            </div>
-
-                            <div class="response-item">
-                                <h3>Solicitar dados/link do campeonato</h3>
-                                <div class="response-content">
-                                    <p>Poderia me encaminhar o link do seu campeonato para que eu consiga consultar no sistema, por gentileza? 👨🏻‍💻</p>
-                                </div>
-                                <button class="copy-btn" onclick="copyToClipboard(this, 'Poderia me encaminhar o link do seu campeonato para que eu consiga consultar no sistema, por gentileza? 👨🏻‍💻')">
-                                    <i class="fas fa-copy"></i> Copiar
-                                </button>
-                            </div>
-
-                            <div class="response-item">
-                                <h3>Pedido de prints/vídeo curto</h3>
-                                <div class="response-content">
-                                    <p>Você poderia me enviar um print da tela ou um vídeo curto mostrando o problema? Isso me ajudará a entender melhor a situação.</p>
-                                </div>
-                                <button class="copy-btn" onclick="copyToClipboard(this, 'Você poderia me enviar um print da tela ou um vídeo curto mostrando o problema? Isso me ajudará a entender melhor a situação.')">
-                                    <i class="fas fa-copy"></i> Copiar
-                                </button>
-                            </div>
-
-                            <div class="response-item">
-                                <h3>Abertura de ticket</h3>
-                                <div class="response-content">
-                                    <p>Obrigado pelas informações! Vou abrir um ticket para análise técnica e entrarei em contato assim que for resolvido.</p>
-                                </div>
-                                <button class="copy-btn" onclick="copyToClipboard(this, 'Obrigado pelas informações! Vou abrir um ticket para análise técnica e entrarei em contato assim que for resolvido.')">
-                                    <i class="fas fa-copy"></i> Copiar
-                                </button>
-                            </div>
-
-                            <div class="response-item">
-                                <h3>Mensagem de "em análise"</h3>
-                                <div class="response-content">
-                                    <p>Seu caso está em análise pela nossa equipe técnica. Assim que tivermos uma resposta, entraremos em contato. Obrigado pela paciência!</p>
-                                </div>
-                                <button class="copy-btn" onclick="copyToClipboard(this, 'Seu caso está em análise pela nossa equipe técnica. Assim que tivermos uma resposta, entraremos em contato. Obrigado pela paciência!')">
-                                    <i class="fas fa-copy"></i> Copiar
-                                </button>
-                            </div>
-
-                            <div class="response-item">
-                                <h3>Encerramento</h3>
-                                <div class="response-content">
-                                    <p>Problema resolvido! Se precisar de mais alguma coisa, estarei aqui. Obrigado por escolher a Copa Fácil! 🏆</p>
-                                </div>
-                                <button class="copy-btn" onclick="copyToClipboard(this, 'Problema resolvido! Se precisar de mais alguma coisa, estarei aqui. Obrigado por escolher a Copa Fácil! 🏆')">
-                                    <i class="fas fa-copy"></i> Copiar
-                                </button>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Modelos & Formulários Section -->
-                    <section id="modelos-formularios" class="section">
-                        <h2>Modelos & Formulários</h2>
-                        
-                        <div class="models-container">
-                            <div class="model-item">
-                                <h3>Links Úteis</h3>
-                                <div class="links-list">
-                                    <a href="[LINK_DO_ADMIN]" target="_blank" class="link-item">
-                                        <i class="fas fa-external-link-alt"></i>
-                                        Painel Administrativo
-                                    </a>
-                                    <a href="[FORM_DE_BUG]" target="_blank" class="link-item">
-                                        <i class="fas fa-bug"></i>
-                                        Formulário de Bug
-                                    </a>
-                                </div>
-                            </div>
-
-                            <div class="model-item">
-                                <h3>Modelo de Abertura de Bug</h3>
-                                <div class="bug-template">
-                                    <h4>Template para Relatório de Bug:</h4>
-                                    <div class="template-content">
-                                        <p><strong>Passos para reproduzir:</strong><br>
-                                        1. [Descreva o primeiro passo]<br>
-                                        2. [Descreva o segundo passo]<br>
-                                        3. [Continue até o problema ocorrer]</p>
-                                        
-                                        <p><strong>Resultado esperado:</strong><br>
-                                        [O que deveria acontecer]</p>
-                                        
-                                        <p><strong>Resultado obtido:</strong><br>
-                                        [O que realmente aconteceu]</p>
-                                        
-                                        <p><strong>ID do campeonato:</strong><br>
-                                        [ID ou link do campeonato]</p>
-                                        
-                                        <p><strong>Horário do ocorrido:</strong><br>
-                                        [Data e hora exata]</p>
-                                        
-                                        <p><strong>Prints/evidências:</strong><br>
-                                        [Anexar capturas de tela ou vídeos]</p>
-                                    </div>
-                                    <!-- ✅ passa o event explicitamente -->
-                                    <button class="copy-btn" onclick="copyBugTemplate(event)">
-                                        <i class="fas fa-copy"></i> Copiar Template
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- Changelog Section -->
-                    <section id="changelog" class="section">
-                        <h2>Changelog (O que mudou)</h2>
-                        
-                        <!-- EDITAR AQUI: Adicione novas entradas de changelog na lista abaixo -->
-                        <div class="changelog-container">
-                            <div class="changelog-item">
-                                <div class="changelog-date">15/01/2024</div>
-                                <div class="changelog-content">
-                                    <h4>Novo sistema de recálculo de tabelas</h4>
-                                    <p><strong>Mudança:</strong> Implementada opção para preservar 1ª rodada durante recálculos</p>
-                                    <p><strong>Impacto no suporte:</strong> Redução de 40% nos chamados relacionados a recálculos incorretos</p>
-                                </div>
-                            </div>
-
-                            <div class="changelog-item">
-                                <div class="changelog-date">12/01/2024</div>
-                                <div class="changelog-content">
-                                    <h4>Melhoria na recuperação de equipes</h4>
-                                    <p><strong>Mudança:</strong> Nova interface para restaurar equipes removidas</p>
-                                    <p><strong>Impacto no suporte:</strong> Processo mais rápido e intuitivo para recuperação de dados</p>
-                                </div>
-                            </div>
-
-                            <div class="changelog-item">
-                                <div class="changelog-date">10/01/2024</div>
-                                <div class="changelog-content">
-                                    <h4>Integração com sistema de pagamentos</h4>
-                                    <p><strong>Mudança:</strong> Sincronização automática de boletos compensados</p>
-                                    <p><strong>Impacto no suporte:</strong> Redução de 60% nos chamados sobre pagamentos não reconhecidos</p>
-                                </div>
-                            </div>
-
-                            <div class="changelog-item">
-                                <div class="changelog-date">08/01/2024</div>
-                                <div class="changelog-content">
-                                    <h4>Portal de procedimentos lançado</h4>
-                                    <p><strong>Mudança:</strong> Criação deste portal interno para centralizar informações</p>
-                                    <p><strong>Impacto no suporte:</strong> Padronização do atendimento e acesso rápido a procedimentos</p>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                </div>
+          <!-- Busca Global (sempre visível) -->
+          <div id="global-search" class="global-search">
+            <div class="search-container">
+              <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Buscar procedimentos, respostas ou conteúdo..."/>
+              </div>
             </div>
-        </div>
-    </main>
 
-    <!-- Mobile Menu Toggle -->
-    <button class="mobile-menu-toggle" id="mobileMenuToggle">
-        <i class="fas fa-bars"></i>
-    </button>
+            <section id="global-results" class="search-results-section hidden">
+              <h2>Resultados da Busca</h2>
+              <div id="search-results-list"></div>
+            </section>
+          </div>
 
-    <script src="js/script.js"></script>
+          <!-- Home -->
+          <section id="home" class="section active">
+            <div class="cards-grid">
+              <div class="card" data-section="procedimentos">
+                <div class="card-icon"><i class="fas fa-list-check"></i></div>
+                <h3>Procedimentos</h3>
+                <p>Runbooks e guias passo a passo para resolver problemas comuns</p>
+                <button class="card-btn" onclick="navigateToSection('procedimentos')">Acessar</button>
+              </div>
+
+              <div class="card" data-section="financeiro">
+                <div class="card-icon"><i class="fas fa-wallet"></i></div>
+                <h3>Financeiro</h3>
+                <p>Boletos, comprovantes e orientações de pagamentos</p>
+                <button class="card-btn" onclick="navigateToSection('financeiro')">Acessar</button>
+              </div>
+
+              <div class="card" data-section="respostas-rapidas">
+                <div class="card-icon"><i class="fas fa-comments"></i></div>
+                <h3>Respostas Rápidas</h3>
+                <p>Mensagens prontas para WhatsApp e atendimento ao cliente</p>
+                <button class="card-btn" onclick="navigateToSection('respostas-rapidas')">Acessar</button>
+              </div>
+
+              <div class="card" data-section="modelos-formularios">
+                <div class="card-icon"><i class="fas fa-file-alt"></i></div>
+                <h3>Modelos & Formulários</h3>
+                <p>Templates e formulários para abertura de bugs e relatórios</p>
+                <button class="card-btn" onclick="navigateToSection('modelos-formularios')">Acessar</button>
+              </div>
+
+              <div class="card" data-section="changelog">
+                <div class="card-icon"><i class="fas fa-history"></i></div>
+                <h3>Changelog</h3>
+                <p>Histórico de mudanças e atualizações do sistema</p>
+                <button class="card-btn" onclick="navigateToSection('changelog')">Acessar</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Como Usar -->
+          <section id="como-usar" class="section">
+            <h2>Como Usar / Regras de Ouro</h2>
+            <div class="info-box">
+              <h3>Como Navegar</h3>
+              <p>Na esquerda, selecione o assunto desejado. Use a barra de busca para encontrar rapidamente procedimentos específicos.</p>
+            </div>
+
+            <div class="rules-container">
+              <h3>Regras de Ouro do Atendimento</h3>
+              <div class="rules-grid">
+                <div class="rule-item"><i class="fas fa-heart"></i><h4>Empatia</h4><p>Coloque-se no lugar do cliente e demonstre compreensão</p></div>
+                <div class="rule-item"><i class="fas fa-graduation-cap"></i><h4>Educação</h4><p>Mantenha sempre um tom respeitoso e profissional</p></div>
+                <div class="rule-item"><i class="fas fa-clock"></i><h4>Paciência</h4><p>Dedique o tempo necessário para resolver o problema</p></div>
+                <div class="rule-item"><i class="fas fa-search"></i><h4>Coletar Dados</h4><p>Sempre colete informações completas antes de agir</p></div>
+                <div class="rule-item"><i class="fas fa-arrow-up"></i><h4>Seguir Procedimento</h4><p>Siga os procedimentos estabelecidos e escale quando necessário</p></div>
+                <div class="rule-item"><i class="fas fa-lightbulb"></i><h4>Aprender</h4><p>Sempre busque aprender e manter o conhecimento atualizado</p></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Procedimentos -->
+          <section id="procedimentos" class="section">
+            <h2>Procedimentos (Runbooks)</h2>
+
+            <div class="procedures-container">
+              <!-- 1: Alterar senha -->
+              <div class="procedure-item">
+                <div class="procedure-header" data-procedure="proc1">
+                  <h3>Alterar senha / Esqueci login</h3>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="procedure-content" id="proc1">
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-play-circle"></i> Quando usar</h4>
+                    <p>Quando o cliente solicita a alteração de senha ou recuperação de login.</p>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-check-circle"></i> Pré-requisitos</h4>
+                    <p>• Acesso ao painel administrativo<br>• Link do campeonato, nome de usuário ou e-mail para localizar no sistema<br>• Confirmação dos dados do cliente (nome, e-mail ou usuário)<br>• Pergunte qual <strong>senha</strong> deseja colocar<br>• Sem referência? Confirme se ele criou um campeonato</p>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-list-ol"></i> Passos</h4>
+                    <ol>
+                      <li>Acesse o painel administrativo do campeonato</li>
+                      <li>Vá em <strong>“Usuário”</strong> → <strong>“Nova senha”</strong> → <strong>“Alterar senha”</strong></li>
+                      <li>Após alterar, deve aparecer <strong>“OK”</strong></li>
+                      <li>Envie usuário e senha ao cliente</li>
+                      <li><em>Login Facebook</em>: crie novo usuário e senha; peça e-mail e a senha desejada</li>
+                    </ol>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Escalar se...</h4>
+                    <p>• Erro durante o procedimento<br>• Você não conseguiu achar a conta do cliente</p>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-comment"></i> Mensagem ao cliente</h4>
+                    <div class="message-box">
+                      "Senha alterada com sucesso! Você pode acessar com<br>
+                      <strong>Usuário:</strong> <strong>[NOME_DE_USUARIO]</strong><br>
+                      <strong>Senha:</strong> <strong>[SENHA]</strong>. Qualquer dúvida, fico à disposição."
+                    </div>
+                    <div class="message-box">
+                      "Seu login via Facebook foi desativado. Criei um novo usuário e senha e transferi seus dados.<br>
+                      <strong>Usuário:</strong> <strong>[NOME_DE_USUARIO]</strong><br>
+                      <strong>Senha:</strong> <strong>[SENHA]</strong>. Por favor, verifique se está tudo certo."
+                    </div>
+                  </div>
+                  <div class="procedure-footer">
+                    <p><strong>Responsável:</strong> Felipe | <strong>Última revisão:</strong> 26/09/2025</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 2: Transferir dados -->
+              <div class="procedure-item">
+                <div class="procedure-header" data-procedure="proc2">
+                  <h3>Transferir dados de uma conta para outra</h3>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="procedure-content" id="proc2">
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-play-circle"></i> Quando usar</h4>
+                    <p>Quando o cliente precisa mover todos os dados da conta antiga para uma nova conta.</p>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-check-circle"></i> Pré-requisitos</h4>
+                    <p>• Acesso ao painel administrativo<br>• Identificar as duas contas (antiga e nova) via link/ID/usuário/e-mail<br>• Garantir que a <strong>conta nova esteja vazia</strong> (sem campeonatos ou dados ativos)</p>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-list-ol"></i> Passos</h4>
+                    <ol>
+                      <li>Acesse o painel administrativo do campeonato</li>
+                      <li>Na conta <strong>nova</strong>, copie o <strong>link/ID</strong></li>
+                      <li>Volte para a <strong>conta antiga</strong></li>
+                      <li>Cole o link/ID no campo <strong>“Novo usuário”</strong></li>
+                      <li>Clique em <strong>“Transferir dados”</strong></li>
+                      <li>Após transferir, deve aparecer <strong>“OK”</strong></li>
+                    </ol>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-info-circle"></i> Observações</h4>
+                    <p>Se aparecer <strong>“Error”</strong> ao transferir, a conta nova já possui dados (ex.: campeonato ativo). A transferência só funciona para <strong>contas vazias</strong>.</p>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Escalar se...</h4>
+                    <p>• Erro durante o procedimento<br>• Você não conseguiu achar a conta do cliente</p>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-comment"></i> Mensagem ao cliente</h4>
+                    <div class="message-box">
+                      "Transferência concluída! Movi todos os seus dados da conta antiga para a nova. Acesse com o <strong>novo usuário</strong> e confira se está tudo certo. Qualquer divergência, me avise que eu ajusto pra você."
+                    </div>
+                    <div class="message-box">
+                      "Tentei fazer a transferência, mas a conta nova já possui dados e o sistema retornou <strong>“Error”</strong>. Para concluir, preciso que a conta nova esteja vazia. Posso criar uma conta limpa para você ou usar outra conta sem dados."
+                    </div>
+                  </div>
+                  <div class="procedure-footer">
+                    <p><strong>Responsável:</strong> Felipe | <strong>Última revisão:</strong> 26/09/2025</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3: Boleto não compensou
+              <div class="procedure-item">
+                <div class="procedure-header" data-procedure="proc3">
+                  <h3>Boleto não compensou</h3>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="procedure-content" id="proc3">
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-play-circle"></i> Quando usar</h4>
+                    <p>Quando o cliente informa que pagou o boleto mas o sistema não reconheceu o pagamento.</p>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-check-circle"></i> Pré-requisitos</h4>
+                    <p>• Comprovante de pagamento do cliente<br>• Código de barras do boleto<br>• Acesso ao sistema financeiro</p>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-list-ol"></i> Passos</h4>
+                    <ol>
+                      <li>Solicite o comprovante de pagamento</li>
+                      <li>Verifique a data de pagamento (até 3 dias úteis)</li>
+                      <li>Consulte o status no sistema financeiro</li>
+                      <li>Se confirmado, libere manualmente o acesso</li>
+                      <li>Atualize o status do pagamento no sistema</li>
+                    </ol>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Escalar se...</h4>
+                    <p>• Pagamento não consta no sistema após 5 dias úteis<br>• Comprovante apresenta inconsistências<br>• Sistema não permite liberação manual</p>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-comment"></i> Mensagem ao cliente</h4>
+                    <div class="message-box">
+                      "Pagamento confirmado e liberado! Seu acesso já está ativo. Obrigado pela paciência e por escolher a Copa Fácil."
+                    </div>
+                  </div>
+                  <div class="procedure-footer">
+                    <p><strong>Responsável:</strong> Equipe Financeira | <strong>Última revisão:</strong> 10/01/2024</p>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+          </section>
+
+          <!-- Financeiro -->
+          <section id="financeiro" class="section">
+            <h2>Financeiro</h2>
+            <div class="procedures-container">
+
+              <!-- fin1 -->
+              <div class="procedure-item">
+                <div class="procedure-header" data-procedure="fin1">
+                  <h3>Formas de pagamento</h3>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="procedure-content" id="fin1">
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-play-circle"></i> Quando usar</h4>
+                    <p>Quando o cliente entra em contato perguntando como pode realizar o pagamento.</p>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-check-circle"></i> Formas de pagamento</h4>
+                    <p><strong>Pelo aplicativo:</strong><br>• Apenas cartão de crédito</p>
+                    <p><strong>Pelo site:</strong><br>• Cartão de crédito<br>• Boleto bancário<br>• Pix</p>
+                    <p><strong>WhatsApp / E-mail / Telegram:</strong><br>• Boleto bancário<br>• Pix<br>• Chave Pix: contato@copafacil.com</p>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Escalar se...</h4>
+                    <p>• Qualquer problema no pagamento ou <strong>na geração do boleto</strong></p>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-comment"></i> Mensagem ao cliente</h4>
+                    <div class="message-box">
+                      "Você pode pagar no app com cartão de crédito ou, se preferir, pelo site (cartão, boleto ou Pix). Se for mais conveniente, posso ativar a assinatura por aqui via Pix."
+                    </div>
+                  </div>
+                  <div class="procedure-footer">
+                    <p><strong>Responsável:</strong> Felipe | <strong>Última revisão:</strong> 24/09/2025</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- fin2 -->
+              <div class="procedure-item">
+                <div class="procedure-header" data-procedure="fin2">
+                  <h3>Gerar boleto bancário</h3>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="procedure-content" id="fin2">
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-play-circle"></i> Quando usar</h4>
+                    <p>Quando o cliente solicita um boleto bancário para pagamento.</p>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-check-circle"></i> Pré-requisitos</h4>
+                    <p>• Acesso à conta bancária da empresa<br>• Dados do cliente (nome, CPF/CNPJ, CEP, endereço)</p>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-list-ol"></i> Passos</h4>
+                    <ol>
+                      <li>Acesse <strong>a conta bancária</strong> → <strong>Cobrar/Receber</strong> → <strong>Nova Cobrança</strong></li>
+                      <li>Selecionar cliente / Cadastrar Cliente</li>
+                      <li>Pesquisar pelo <strong>CPF/CNPJ</strong> na lupa e confirmar</li>
+                      <li>Gerar o boleto, baixar e enviar ao cliente</li>
+                    </ol>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Escalar se...</h4>
+                    <p>• “Nova Cobrança” indisponível<br>• Erro ao gerar o boleto<br>• Dados divergentes do informado</p>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-comment"></i> Mensagem ao cliente</h4>
+                    <div class="message-box">
+                      "Obrigado por aguardar! Aqui está o seu boleto para pagamento. Qualquer dúvida, fico à disposição."
+                    </div>
+                  </div>
+                  <div class="procedure-footer">
+                    <p><strong>Responsável:</strong> Felipe | <strong>Última revisão:</strong> 24/09/2025</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- fin3 -->
+              <!-- <div class="procedure-item">
+                <div class="procedure-header" data-procedure="fin3">
+                  <h3>Comprovante não reconhecido</h3>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="procedure-content" id="fin3">
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-play-circle"></i> Quando usar</h4>
+                    <p>Cliente enviou comprovante, mas o sistema não compensou/localizou o pagamento.</p>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-check-circle"></i> Pré-requisitos</h4>
+                    <p>• Comprovante em mãos • Código de barras do boleto</p>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-list-ol"></i> Passos</h4>
+                    <ol>
+                      <li>Conferir <strong>data</strong> e <strong>valor</strong> do comprovante</li>
+                      <li>Validar código de barras e status no financeiro</li>
+                      <li>Se pago, liberar acesso e ajustar status</li>
+                      <li>Se não constar, aguardar até <strong>3 dias úteis</strong> ou abrir ticket</li>
+                    </ol>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Escalar se...</h4>
+                    <p>• Após 5 dias úteis ainda não constar<br>• Divergências no comprovante<br>• Erro ao atualizar status</p>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-comment"></i> Mensagem ao cliente</h4>
+                    <div class="message-box">
+                      "Conferi seu comprovante, obrigado! Já estamos tratando e te retorno em breve. Aviso assim que o sistema atualizar."
+                    </div>
+                  </div>
+                  <div class="procedure-footer">
+                    <p><strong>Responsável:</strong> Equipe Financeira | <strong>Última revisão:</strong> 20/01/2024</p>
+                  </div>
+                </div>
+              </div> -->
+
+              <!-- fin4 -->
+              <!-- <div class="procedure-item">
+                <div class="procedure-header" data-procedure="fin4">
+                  <h3>Cancelar pagamento (boleto)</h3>
+                  <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="procedure-content" id="fin4">
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-play-circle"></i> Quando usar</h4>
+                    <p>Cancelamento antes da compensação ou em caso de erro de emissão.</p>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-check-circle"></i> Pré-requisitos</h4>
+                    <p>• Confirmação do organizador • Motivo do cancelamento</p>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-list-ol"></i> Passos</h4>
+                    <ol>
+                      <li>Acessar <strong>Financeiro → Boletos</strong> e abrir o boleto</li>
+                      <li>Verificar se ainda está <strong>não compensado</strong></li>
+                      <li>Clicar em <strong>Cancelar</strong> e registrar justificativa</li>
+                      <li>Enviar confirmação ao cliente</li>
+                    </ol>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Escalar se...</h4>
+                    <p>• Boleto já compensado • Inconsistência de status no gateway • Travamento ao salvar</p>
+                  </div>
+                  <div class="procedure-section">
+                    <h4><i class="fas fa-comment"></i> Mensagem ao cliente</h4>
+                    <div class="message-box">
+                      "Cancelamento realizado conforme solicitado. Se quiser, já posso emitir um novo boleto."
+                    </div>
+                  </div>
+                  <div class="procedure-footer">
+                    <p><strong>Responsável:</strong> Equipe Financeira | <strong>Última revisão:</strong> 20/01/2024</p>
+                  </div>
+                </div>
+              </div> -->
+
+            </div>
+          </section>
+
+          <!-- Respostas Rápidas -->
+          <section id="respostas-rapidas" class="section">
+            <h2>Respostas Rápidas (WhatsApp)</h2>
+            <div class="quick-responses">
+              <div class="response-item">
+                <h3>Saudação</h3>
+                <div class="response-content"><p>Olá! Sou da equipe de suporte do Copa Fácil. Como posso ajudá-lo hoje?</p></div>
+                <button class="copy-btn" onclick="copyToClipboard(this, 'Olá! Sou da equipe de suporte do Copa Fácil. Como posso ajudá-lo hoje?')"><i class="fas fa-copy"></i> Copiar</button>
+              </div>
+
+              <div class="response-item">
+                <h3>Solicitar dados/link do campeonato</h3>
+                <div class="response-content"><p>Poderia me encaminhar o link do seu campeonato para que eu consiga consultar no sistema, por gentileza? 👨🏻‍💻</p></div>
+                <button class="copy-btn" onclick="copyToClipboard(this, 'Poderia me encaminhar o link do seu campeonato para que eu consiga consultar no sistema, por gentileza? 👨🏻‍💻')"><i class="fas fa-copy"></i> Copiar</button>
+              </div>
+
+              <div class="response-item">
+                <h3>Pedido de prints/vídeo curto</h3>
+                <div class="response-content"><p>Você poderia me enviar um print da tela ou um vídeo curto mostrando o problema? Isso me ajudará a entender melhor a situação.</p></div>
+                <button class="copy-btn" onclick="copyToClipboard(this, 'Você poderia me enviar um print da tela ou um vídeo curto mostrando o problema? Isso me ajudará a entender melhor a situação.')"><i class="fas fa-copy"></i> Copiar</button>
+              </div>
+
+              <div class="response-item">
+                <h3>Abertura de ticket</h3>
+                <div class="response-content"><p>Obrigado pelas informações! Vou abrir um ticket para análise técnica e entrarei em contato assim que for resolvido.</p></div>
+                <button class="copy-btn" onclick="copyToClipboard(this, 'Obrigado pelas informações! Vou abrir um ticket para análise técnica e entrarei em contato assim que for resolvido.')"><i class="fas fa-copy"></i> Copiar</button>
+              </div>
+
+              <div class="response-item">
+                <h3>Mensagem de "em análise"</h3>
+                <div class="response-content"><p>Seu caso está em análise pela nossa equipe técnica. Assim que tivermos uma resposta, entraremos em contato. Obrigado pela paciência!</p></div>
+                <button class="copy-btn" onclick="copyToClipboard(this, 'Seu caso está em análise pela nossa equipe técnica. Assim que tivermos uma resposta, entraremos em contato. Obrigado pela paciência!')"><i class="fas fa-copy"></i> Copiar</button>
+              </div>
+
+              <div class="response-item">
+                <h3>Encerramento</h3>
+                <div class="response-content"><p>Problema resolvido! Se precisar de mais alguma coisa, estarei aqui. Obrigado por escolher a Copa Fácil! 🏆</p></div>
+                <button class="copy-btn" onclick="copyToClipboard(this, 'Problema resolvido! Se precisar de mais alguma coisa, estarei aqui. Obrigado por escolher a Copa Fácil! 🏆')"><i class="fas fa-copy"></i> Copiar</button>
+              </div>
+            </div>
+          </section>
+
+          <!-- Modelos & Formulários -->
+          <section id="modelos-formularios" class="section">
+            <h2>Modelos & Formulários</h2>
+            <div class="models-container">
+              <div class="model-item">
+                <h3>Links Úteis</h3>
+                <div class="links-list">
+                  <a href="[LINK_DO_ADMIN]" target="_blank" class="link-item"><i class="fas fa-external-link-alt"></i> Painel Administrativo</a>
+                  <a href="[FORM_DE_BUG]" target="_blank" class="link-item"><i class="fas fa-bug"></i> Formulário de Bug</a>
+                </div>
+              </div>
+
+              <div class="model-item">
+                <h3>Modelo de Abertura de Bug</h3>
+                <div class="bug-template">
+                  <h4>Template para Relatório de Bug:</h4>
+                  <div class="template-content">
+                    <p><strong>Passos para reproduzir:</strong><br>
+                    1. [Descreva o primeiro passo]<br>
+                    2. [Descreva o segundo passo]<br>
+                    3. [Continue até o problema ocorrer]</p>
+                    <p><strong>Resultado esperado:</strong><br>[O que deveria acontecer]</p>
+                    <p><strong>Resultado obtido:</strong><br>[O que realmente aconteceu]</p>
+                    <p><strong>ID do campeonato:</strong><br>[ID ou link do campeonato]</p>
+                    <p><strong>Horário do ocorrido:</strong><br>[Data e hora exata]</p>
+                    <p><strong>Prints/evidências:</strong><br>[Anexar capturas de tela ou vídeos]</p>
+                  </div>
+                  <button class="copy-btn" onclick="copyBugTemplate(event)"><i class="fas fa-copy"></i> Copiar Template</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Changelog -->
+          <section id="changelog" class="section">
+            <h2>Changelog (O que mudou)</h2>
+            <div class="changelog-container">
+              <div class="changelog-item">
+                <div class="changelog-date">15/01/2024</div>
+                <div class="changelog-content">
+                  <h4>Novo sistema de recálculo de tabelas</h4>
+                  <p><strong>Mudança:</strong> Implementada opção para preservar 1ª rodada durante recálculos</p>
+                  <p><strong>Impacto no suporte:</strong> Redução de 40% nos chamados relacionados a recálculos incorretos</p>
+                </div>
+              </div>
+
+              <div class="changelog-item">
+                <div class="changelog-date">12/01/2024</div>
+                <div class="changelog-content">
+                  <h4>Melhoria na recuperação de equipes</h4>
+                  <p><strong>Mudança:</strong> Nova interface para restaurar equipes removidas</p>
+                  <p><strong>Impacto no suporte:</strong> Processo mais rápido e intuitivo para recuperação de dados</p>
+                </div>
+              </div>
+
+              <div class="changelog-item">
+                <div class="changelog-date">10/01/2024</div>
+                <div class="changelog-content">
+                  <h4>Integração com sistema de pagamentos</h4>
+                  <p><strong>Mudança:</strong> Sincronização automática de boletos compensados</p>
+                  <p><strong>Impacto no suporte:</strong> Redução de 60% nos chamados sobre pagamentos não reconhecidos</p>
+                </div>
+              </div>
+
+              <div class="changelog-item">
+                <div class="changelog-date">08/01/2024</div>
+                <div class="changelog-content">
+                  <h4>Portal de procedimentos lançado</h4>
+                  <p><strong>Mudança:</strong> Criação deste portal interno para centralizar informações</p>
+                  <p><strong>Impacto no suporte:</strong> Padronização do atendimento e acesso rápido a procedimentos</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </div> <!-- /.content -->
+      </div> <!-- /.layout -->
+    </div> <!-- /.container -->
+  </main>
+
+  <!-- Mobile Menu Toggle -->
+  <button class="mobile-menu-toggle" id="mobileMenuToggle">
+    <i class="fas fa-bars"></i>
+  </button>
+
+  <script src="js/script.js"></script>
 </body>
 </html>
