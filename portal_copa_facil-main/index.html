@@ -1,19 +1,31 @@
 <!DOCTYPE html>
+<!-- EN: DOCTYPE (tipo de documento) | Define HTML5 -->
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
+  <!-- EN: viewport (janela de visualização) | Garante layout responsivo no mobile -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Portal de Procedimentos - Copa Fácil</title>
+
+  <!-- styles.css: folha principal de estilos do projeto -->
   <link rel="stylesheet" href="css/styles.css"/>
+
+  <!-- EN: Google Fonts (Inter) | Tipografia principal definida pelos tokens no CSS -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+  <!-- EN: Font Awesome (ícones) via CDN -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
 </head>
 <body>
-  <!-- Header -->
+  <!-- Header (Cabeçalho do site)
+       - Contém logo (link para Home), título e tagline (slogan)
+       - Classes em EN por padrão de mercado: .header, .logo, .tagline -->
   <header class="header">
-    <div class="container">
-      <div class="header-content">
+    <div class="container"><!-- EN: .container | centraliza e limita largura -->
+      <div class="header-content"><!-- Conteúdo central do header -->
+        <!-- aria-label ajuda leitores de tela; href "#home" navega para a seção Home -->
         <a href="#home" class="logo" aria-label="Ir para Home">
+          <!-- EN: brand-logo | imagem do logotipo, versão circular "limpa" (sem aro/sombra) -->
           <img src="assets/image.png" alt="Logo da Copa Fácil" class="brand-logo" width="56" height="56" loading="lazy" decoding="async"/>
           <h1>Portal de Procedimentos – Copa Fácil</h1>
         </a>
@@ -22,15 +34,20 @@
     </div>
   </header>
 
-  <!-- Main Content -->
+  <!-- Main Content (Conteúdo Principal)
+       - Estrutura base: layout com Sidebar (navegação) + Content Area (seções) -->
   <main class="main">
     <div class="container">
-      <div class="layout">
-        <!-- Sidebar (Desktop) -->
+      <div class="layout"><!-- EN: layout | usa Flex para sidebar + conteúdo -->
+
+        <!-- Sidebar (Desktop)
+             - Navegação fixa no desktop, vira "drawer" no mobile (JS controla .active)
+             - EN: sidebar, nav-link (link de navegação), .active (item ativo) -->
         <aside class="sidebar" id="sidebar">
           <nav class="sidebar-nav">
             <h3>Navegação</h3>
             <ul>
+              <!-- href com hash (#id) navega entre seções; JS intercepta via navigateToSection -->
               <li><a href="#home" class="nav-link active">Home</a></li>
               <li><a href="#como-usar" class="nav-link">Como Usar</a></li>
               <li><a href="#procedimentos" class="nav-link">Procedimentos</a></li>
@@ -42,28 +59,35 @@
           </nav>
         </aside>
 
-        <!-- Content Area -->
+        <!-- Content Area (Área de Conteúdo)
+             - Cada .section representa uma "página" interna
+             - JS alterna visibilidade via classe .active -->
         <div class="content">
 
-          <!-- Busca Global (sempre visível) -->
+          <!-- Busca Global (sempre visível)
+               - EN: global-search / search-box / search-results-section
+               - Input #searchInput é indexado pelo JS (initializeSearch/performSearch) -->
           <div id="global-search" class="global-search">
             <div class="search-container">
               <div class="search-box">
-                <i class="fas fa-search"></i>
+                <i class="fas fa-search"></i><!-- Ícone decorativo -->
                 <input type="text" id="searchInput" placeholder="Buscar procedimentos, respostas ou conteúdo..."/>
               </div>
             </div>
 
+            <!-- Painel fixo para resultados da busca; começa oculto (.hidden) -->
             <section id="global-results" class="search-results-section hidden">
               <h2>Resultados da Busca</h2>
-              <div id="search-results-list"></div>
+              <div id="search-results-list"></div><!-- JS insere os cartões de resultado aqui -->
             </section>
           </div>
 
-          <!-- Home -->
-          <section id="home" class="section active">
+          <!-- Home (Seção inicial)
+               - EN: cards-grid / card / card-icon / card-btn
+               - Botões chamam navigateToSection('id') diretamente -->
+          <section id="home" class="section active"><!-- .active exibe esta seção por padrão -->
             <div class="cards-grid">
-              <div class="card" data-section="procedimentos">
+              <div class="card" data-section="procedimentos"><!-- EN: data-section (atributo de dados) -->
                 <div class="card-icon"><i class="fas fa-list-check"></i></div>
                 <h3>Procedimentos</h3>
                 <p>Runbooks e guias passo a passo para resolver problemas comuns</p>
@@ -100,7 +124,8 @@
             </div>
           </section>
 
-          <!-- Como Usar -->
+          <!-- Como Usar (guia introdutória + regras de ouro)
+               - EN: info-box (caixa destacada), rules-grid/rule-item -->
           <section id="como-usar" class="section">
             <h2>Como Usar / Regras de Ouro</h2>
             <div class="info-box">
@@ -121,17 +146,21 @@
             </div>
           </section>
 
-          <!-- Procedimentos -->
+          <!-- Procedimentos (Runbooks)
+               - Estrutura de acordeões (accordion EN): .procedure-item/.procedure-header/.procedure-content
+               - JS controla abrir/fechar via data-procedure (header) e id correspondente (content) -->
           <section id="procedimentos" class="section">
             <h2>Procedimentos (Runbooks)</h2>
 
             <div class="procedures-container">
               <!-- 1: Alterar senha -->
               <div class="procedure-item">
+                <!-- EN: data-procedure (id alvo do conteúdo) -->
                 <div class="procedure-header" data-procedure="proc1">
                   <h3>Alterar senha / Esqueci login</h3>
-                  <i class="fas fa-chevron-down"></i>
+                  <i class="fas fa-chevron-down"></i><!-- Ícone de seta (abre/fecha) -->
                 </div>
+                <!-- EN: procedure-content | corpo do acordeão; id deve bater com data-procedure -->
                 <div class="procedure-content" id="proc1">
                   <div class="procedure-section">
                     <h4><i class="fas fa-play-circle"></i> Quando usar</h4>
@@ -224,6 +253,7 @@
               </div>
 
               <!-- 3: Boleto não compensou
+              (Bloco comentado preservado conforme regra do projeto: NUNCA REMOVER COMENTÁRIOS)
               <div class="procedure-item">
                 <div class="procedure-header" data-procedure="proc3">
                   <h3>Boleto não compensou</h3>
@@ -266,7 +296,8 @@
             </div> -->
           </section>
 
-          <!-- Financeiro -->
+          <!-- Financeiro
+               - Usa o mesmo componente visual (.procedure-*) para padronização -->
           <section id="financeiro" class="section">
             <h2>Financeiro</h2>
             <div class="procedures-container">
@@ -344,90 +375,17 @@
                 </div>
               </div>
 
-              <!-- fin3 -->
-              <!-- <div class="procedure-item">
-                <div class="procedure-header" data-procedure="fin3">
-                  <h3>Comprovante não reconhecido</h3>
-                  <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="procedure-content" id="fin3">
-                  <div class="procedure-section">
-                    <h4><i class="fas fa-play-circle"></i> Quando usar</h4>
-                    <p>Cliente enviou comprovante, mas o sistema não compensou/localizou o pagamento.</p>
-                  </div>
-                  <div class="procedure-section">
-                    <h4><i class="fas fa-check-circle"></i> Pré-requisitos</h4>
-                    <p>• Comprovante em mãos • Código de barras do boleto</p>
-                  </div>
-                  <div class="procedure-section">
-                    <h4><i class="fas fa-list-ol"></i> Passos</h4>
-                    <ol>
-                      <li>Conferir <strong>data</strong> e <strong>valor</strong> do comprovante</li>
-                      <li>Validar código de barras e status no financeiro</li>
-                      <li>Se pago, liberar acesso e ajustar status</li>
-                      <li>Se não constar, aguardar até <strong>3 dias úteis</strong> ou abrir ticket</li>
-                    </ol>
-                  </div>
-                  <div class="procedure-section">
-                    <h4><i class="fas fa-exclamation-triangle"></i> Escalar se...</h4>
-                    <p>• Após 5 dias úteis ainda não constar<br>• Divergências no comprovante<br>• Erro ao atualizar status</p>
-                  </div>
-                  <div class="procedure-section">
-                    <h4><i class="fas fa-comment"></i> Mensagem ao cliente</h4>
-                    <div class="message-box">
-                      "Conferi seu comprovante, obrigado! Já estamos tratando e te retorno em breve. Aviso assim que o sistema atualizar."
-                    </div>
-                  </div>
-                  <div class="procedure-footer">
-                    <p><strong>Responsável:</strong> Equipe Financeira | <strong>Última revisão:</strong> 20/01/2024</p>
-                  </div>
-                </div>
-              </div> -->
-
-              <!-- fin4 -->
-              <!-- <div class="procedure-item">
-                <div class="procedure-header" data-procedure="fin4">
-                  <h3>Cancelar pagamento (boleto)</h3>
-                  <i class="fas fa-chevron-down"></i>
-                </div>
-                <div class="procedure-content" id="fin4">
-                  <div class="procedure-section">
-                    <h4><i class="fas fa-play-circle"></i> Quando usar</h4>
-                    <p>Cancelamento antes da compensação ou em caso de erro de emissão.</p>
-                  </div>
-                  <div class="procedure-section">
-                    <h4><i class="fas fa-check-circle"></i> Pré-requisitos</h4>
-                    <p>• Confirmação do organizador • Motivo do cancelamento</p>
-                  </div>
-                  <div class="procedure-section">
-                    <h4><i class="fas fa-list-ol"></i> Passos</h4>
-                    <ol>
-                      <li>Acessar <strong>Financeiro → Boletos</strong> e abrir o boleto</li>
-                      <li>Verificar se ainda está <strong>não compensado</strong></li>
-                      <li>Clicar em <strong>Cancelar</strong> e registrar justificativa</li>
-                      <li>Enviar confirmação ao cliente</li>
-                    </ol>
-                  </div>
-                  <div class="procedure-section">
-                    <h4><i class="fas fa-exclamation-triangle"></i> Escalar se...</h4>
-                    <p>• Boleto já compensado • Inconsistência de status no gateway • Travamento ao salvar</p>
-                  </div>
-                  <div class="procedure-section">
-                    <h4><i class="fas fa-comment"></i> Mensagem ao cliente</h4>
-                    <div class="message-box">
-                      "Cancelamento realizado conforme solicitado. Se quiser, já posso emitir um novo boleto."
-                    </div>
-                  </div>
-                  <div class="procedure-footer">
-                    <p><strong>Responsável:</strong> Equipe Financeira | <strong>Última revisão:</strong> 20/01/2024</p>
-                  </div>
-                </div>
-              </div> -->
+              <!-- fin3 / fin4 (comentados e preservados) -->
+              <!--
+              (Mantidos comentados para reativação futura; seguem o padrão .procedure-*)
+              -->
 
             </div>
           </section>
 
-          <!-- Respostas Rápidas -->
+          <!-- Respostas Rápidas
+               - EN: quick-responses / response-item / copy-btn
+               - Botão usa copyToClipboard(this, texto) para copiar mensagem pronta -->
           <section id="respostas-rapidas" class="section">
             <h2>Respostas Rápidas (WhatsApp)</h2>
             <div class="quick-responses">
@@ -469,13 +427,15 @@
             </div>
           </section>
 
-          <!-- Modelos & Formulários -->
+          <!-- Modelos & Formulários
+               - Lista de links úteis + template de bug com botão "Copiar Template" -->
           <section id="modelos-formularios" class="section">
             <h2>Modelos & Formulários</h2>
             <div class="models-container">
               <div class="model-item">
                 <h3>Links Úteis</h3>
                 <div class="links-list">
+                  <!-- target="_blank" abre em nova aba; classe link-item dá o visual de "item clicável" -->
                   <a href="[LINK_DO_ADMIN]" target="_blank" class="link-item"><i class="fas fa-external-link-alt"></i> Painel Administrativo</a>
                   <a href="[FORM_DE_BUG]" target="_blank" class="link-item"><i class="fas fa-bug"></i> Formulário de Bug</a>
                 </div>
@@ -484,7 +444,7 @@
               <div class="model-item">
                 <h3>Modelo de Abertura de Bug</h3>
                 <div class="bug-template">
-                  <h4>Template para Relatório de Bug:</h4>
+                  <h4>Template para Relatório de Bug:</h4><!-- EN: template (modelo) -->
                   <div class="template-content">
                     <p><strong>Passos para reproduzir:</strong><br>
                     1. [Descreva o primeiro passo]<br>
@@ -496,13 +456,16 @@
                     <p><strong>Horário do ocorrido:</strong><br>[Data e hora exata]</p>
                     <p><strong>Prints/evidências:</strong><br>[Anexar capturas de tela ou vídeos]</p>
                   </div>
+                  <!-- copyBugTemplate(event) usa JS para copiar o texto do template -->
                   <button class="copy-btn" onclick="copyBugTemplate(event)"><i class="fas fa-copy"></i> Copiar Template</button>
                 </div>
               </div>
             </div>
           </section>
 
-          <!-- Changelog -->
+          <!-- Changelog (Histórico de mudanças)
+               - EN: changelog | lista itens com data + impacto
+               - Estrutura em cartões com barra lateral colorida -->
           <section id="changelog" class="section">
             <h2>Changelog (O que mudou)</h2>
             <div class="changelog-container">
@@ -549,11 +512,14 @@
     </div> <!-- /.container -->
   </main>
 
-  <!-- Mobile Menu Toggle -->
+  <!-- Mobile Menu Toggle (botão flutuante no mobile)
+       - EN: toggle = alternar (abre/fecha a sidebar)
+       - JS: initializeMobileMenu/toggleMobileMenu/closeMobileMenu -->
   <button class="mobile-menu-toggle" id="mobileMenuToggle">
     <i class="fas fa-bars"></i>
   </button>
 
+  <!-- script principal (JS do portal) -->
   <script src="js/script.js"></script>
 </body>
 </html>

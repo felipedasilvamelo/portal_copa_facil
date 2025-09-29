@@ -1,35 +1,54 @@
 // js/script.js
 // Portal de Procedimentos Copa Fácil - JavaScript
+// ATENÇÃO: NUNCA REMOVER COMENTÁRIOS (pedido do projeto)
+// Neste arquivo, adicionei comentários explicativos em PT-BR e a tradução dos termos em inglês usados nos nomes das funções/variáveis.
 
+/**
+ * 'DOMContentLoaded' (EN) = "conteúdo do documento foi carregado".
+ * Aqui iniciamos os módulos principais assim que o HTML estiver pronto.
+ */
 document.addEventListener('DOMContentLoaded', function() {
     // Inicialização
-    initializeNavigation();
-    initializeSearch(); // ✅ busca global, sempre visível; debounce + mínimo de caracteres
-    initializeMobileMenu();
-    initializeProcedures();
+    initializeNavigation(); // EN: initialize = inicializar | Configura cliques na sidebar e navegação entre seções
+    initializeSearch();     // EN: search = busca | Busca global (sempre visível) com debounce e mínimo de caracteres
+    initializeMobileMenu(); // EN: mobile menu = menu para mobile | Toggle do menu lateral no celular
+    initializeProcedures(); // EN: procedures = procedimentos | Acordeões (abrir/fechar) dos procedimentos
     
     console.log('Portal Copa Fácil carregado com sucesso!');
 });
 
 // ===== NAVEGAÇÃO ENTRE SEÇÕES =====
+
+/**
+ * initializeNavigation()
+ * - Liga eventos de clique nos links da sidebar (classe .nav-link)
+ * - Impede comportamento padrão do link (hash) e chama navigateToSection()
+ */
 function initializeNavigation() {
-    const navLinks = document.querySelectorAll('.nav-link');
-    const sections = document.querySelectorAll('.section');
+    const navLinks = document.querySelectorAll('.nav-link'); // EN: link de navegação
+    const sections = document.querySelectorAll('.section');  // EN: section = seção (usado como "páginas" internas)
     
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            const targetId = this.getAttribute('href').substring(1);
+            const targetId = this.getAttribute('href').substring(1); // remove o "#"
             navigateToSection(targetId);
         });
     });
 }
 
+/**
+ * navigateToSection(sectionId)
+ * - Mostra a seção solicitada e oculta as demais.
+ * - Atualiza o estado visual do link ativo na sidebar.
+ * - Fecha o menu mobile (se aberto) e sobe o scroll para o topo do conteúdo.
+ * @param {string} sectionId - ID da seção destino (ex.: 'financeiro', 'home')
+ */
 function navigateToSection(sectionId) {
     // Ocultar todas as seções
     const sections = document.querySelectorAll('.section');
     sections.forEach(section => {
-        section.classList.remove('active');
+        section.classList.remove('active'); // EN: active = ativa/visível
     });
     
     // Mostrar seção alvo
@@ -57,6 +76,13 @@ function navigateToSection(sectionId) {
 }
 
 // ===== FUNCIONALIDADE DE BUSCA =====
+
+/**
+ * initializeSearch()
+ * - Seleciona a barra de busca global.
+ * - Garante inicialização única (dataset.initialized).
+ * - Aplica debounce (EN: "antirruído" / atrasar execução) para reduzir chamadas.
+ */
 function initializeSearch() {
     const searchInput = document.getElementById('searchInput');
     if (!searchInput) return;
@@ -65,7 +91,7 @@ function initializeSearch() {
     if (searchInput.dataset.initialized === '1') return;
     searchInput.dataset.initialized = '1';
 
-    const MIN_SEARCH_CHARS = 2;
+    const MIN_SEARCH_CHARS = 2; // mínimo de caracteres para iniciar a busca
 
     // ✅ Um único listener, com debounce + limite mínimo de caracteres
     const onInput = debounce((ev) => {
@@ -78,11 +104,17 @@ function initializeSearch() {
         }
 
         performSearch(value);
-    }, 300);
+    }, 300); // 300ms: bom equilíbrio entre responsividade e performance
 
     searchInput.addEventListener('input', onInput);
 }
 
+/**
+ * performSearch(searchTerm)
+ * - Varre elementos do DOM nas principais seções e coleta correspondências.
+ * - Usa WeakSet (EN) para evitar duplicidade entre componentes parecidos.
+ * @param {string} searchTerm - termo normalizado (minúsculo/trim)
+ */
 function performSearch(searchTerm) {
     if (searchTerm === '') {
         clearSearchResults();
@@ -92,6 +124,7 @@ function performSearch(searchTerm) {
     const searchResults = [];
     const seen = new WeakSet(); // ✅ evita itens duplicados (ex.: finance-item + procedure-item)
 
+    // addResult: adiciona resultado sem duplicar o mesmo elemento
     function addResult(element, obj) {
         if (!seen.has(element)) {
             searchResults.push(obj);
@@ -126,6 +159,7 @@ function performSearch(searchTerm) {
     const finances = document.querySelectorAll('.finance-item');
     finances.forEach(fin => {
         const titleEl = fin.querySelector('h3');
+        // tenta obter corpo de conteúdo de dois jeitos (legado e atual)
         const contentEl = fin.querySelector('.procedure-content, .finance-content');
         if (!titleEl || !contentEl) return;
 
@@ -184,6 +218,11 @@ function performSearch(searchTerm) {
     displaySearchResults(searchResults);
 }
 
+/**
+ * displaySearchResults(results)
+ * - Monta a lista visual com os resultados encontrados.
+ * - Exibe o painel global de resultados e rola a página até ele.
+ */
 function displaySearchResults(results) {
     // Limpa lista atual e garante que o painel existe e esteja visível
     const resultsContainer = createSearchResultsContainer();
@@ -204,6 +243,11 @@ function displaySearchResults(results) {
     scrollResultsIntoView();
 }
 
+/**
+ * createSearchResultsContainer()
+ * - Recupera o container fixo de resultados (já presente no HTML)
+ * - Limpa a lista anterior para reaproveitar o painel.
+ */
 function createSearchResultsContainer() {
     // ✅ Agora o painel é global e fixo no topo do conteúdo (HTML já inclui #global-results)
     const container = document.getElementById('global-results');
@@ -216,13 +260,18 @@ function createSearchResultsContainer() {
     return resultsList || container;
 }
 
+/**
+ * createSearchResultItem(result)
+ * - Cria um cartão/linha representando um resultado.
+ * - Usa encodeURIComponent para gerar um identificador seguro (EN: safe identifier).
+ */
 function createSearchResultItem(result) {
     // ✅ Gera identificador seguro para inline attribute (usa encodeURIComponent)
     const identifierRaw = result.element.id || (result.element.querySelector('h3, h4')?.textContent || '');
     const identifierSafe = encodeURIComponent(identifierRaw);
 
     const item = document.createElement('div');
-    item.className = 'search-result-item';
+    item.className = 'search-result-item'; // EN: item de resultado da busca
     item.innerHTML = `
         <div class="search-result-header">
             <h3>${result.title}</h3>
@@ -256,6 +305,10 @@ function createSearchResultItem(result) {
     return item;
 }
 
+/**
+ * getSectionName(sectionId)
+ * - Mapeia o ID técnico da seção para o rótulo de exibição.
+ */
 function getSectionName(sectionId) {
     const sectionNames = {
         'procedimentos': 'Procedimentos',
@@ -267,6 +320,11 @@ function getSectionName(sectionId) {
     return sectionNames[sectionId] || sectionId;
 }
 
+/**
+ * goToSearchResult(section, itemIdentifier)
+ * - Navega até a seção correspondente e destaca o item encontrado.
+ * - Mantém a barra de busca visível.
+ */
 function goToSearchResult(section, itemIdentifier) {
     // ✅ Mantém a barra de busca visível; apenas navega para a seção e destaca o item
     navigateToSection(section);
@@ -281,6 +339,11 @@ function goToSearchResult(section, itemIdentifier) {
     }, 300);
 }
 
+/**
+ * findElementByIdentifier(section, identifier)
+ * - Tenta localizar um elemento por ID ou, como fallback, pelo texto do título (h3/h4).
+ * - Retorna o "cartão" completo do item (closest em diferentes tipos).
+ */
 function findElementByIdentifier(section, identifier) {
     const sectionElement = document.getElementById(section);
     if (!sectionElement) return null;
@@ -302,6 +365,10 @@ function findElementByIdentifier(section, identifier) {
     return null;
 }
 
+/**
+ * highlightElement(element)
+ * - Aplica um "glow" temporário (borda + fundo) para chamar atenção.
+ */
 function highlightElement(element) {
     const originalStyle = element.style.cssText;
     element.style.cssText += 'border: 3px solid #50EA95; background-color: rgba(80, 234, 149, 0.1);';
@@ -312,12 +379,21 @@ function highlightElement(element) {
 }
 
 // ===== Resultados globais: mostrar/ocultar + scroll =====
+
+/**
+ * showResultsPanel(show)
+ * - Controla a visibilidade do painel global de resultados (classe .hidden).
+ */
 function showResultsPanel(show) {
     const panel = document.getElementById('global-results');
     if (!panel) return;
     panel.classList.toggle('hidden', !show);
 }
 
+/**
+ * scrollResultsIntoView()
+ * - Rola a página para a âncora da busca global, mantendo a barra no topo do viewport.
+ */
 function scrollResultsIntoView() {
     const anchor = document.getElementById('global-search');
     if (anchor) {
@@ -325,6 +401,10 @@ function scrollResultsIntoView() {
     }
 }
 
+/**
+ * clearSearchResults()
+ * - Limpa a lista de resultados e esconde o painel (sem esconder a barra).
+ */
 function clearSearchResults() {
     const panel = document.getElementById('global-results');
     if (!panel) return;
@@ -333,6 +413,10 @@ function clearSearchResults() {
     panel.classList.add('hidden'); // esconde o painel, mantendo a barra visível
 }
 
+/**
+ * showNoResults()
+ * - Exibe um estado vazio ("Nenhum resultado encontrado") no painel.
+ */
 function showNoResults() {
     const panel = document.getElementById('global-results');
     if (!panel) return;
@@ -351,13 +435,19 @@ function showNoResults() {
 }
 
 // ===== MENU MOBILE =====
+
+/**
+ * initializeMobileMenu()
+ * - Liga o botão flutuante (hambúrguer) para abrir/fechar a sidebar no mobile.
+ * - Também fecha ao clicar fora (overlay implícito via documento).
+ */
 function initializeMobileMenu() {
     const mobileToggle = document.getElementById('mobileMenuToggle');
     const sidebar = document.getElementById('sidebar');
     
     if (mobileToggle && sidebar) {
         mobileToggle.addEventListener('click', function() {
-            toggleMobileMenu();
+            toggleMobileMenu(); // EN: toggle = alternar (abrir/fechar)
         });
         
         // Fechar menu ao clicar fora
@@ -369,13 +459,21 @@ function initializeMobileMenu() {
     }
 }
 
+/**
+ * toggleMobileMenu()
+ * - Alterna a classe .active da sidebar para abrir/fechar o drawer.
+ */
 function toggleMobileMenu() {
     const sidebar = document.getElementById('sidebar');
     if (sidebar) {
-        sidebar.classList.toggle('active');
+        sidebar.classList.toggle('active'); // EN: active = aberta
     }
 }
 
+/**
+ * closeMobileMenu()
+ * - Fecha a sidebar (remove .active).
+ */
 function closeMobileMenu() {
     const sidebar = document.getElementById('sidebar');
     if (sidebar) {
@@ -384,6 +482,14 @@ function closeMobileMenu() {
 }
 
 // ===== PROCEDIMENTOS (ACCORDION) =====
+/**
+ * Nota: "accordion" (EN) = acordeão (componente que abre/fecha conteúdo).
+ */
+
+/**
+ * initializeProcedures()
+ * - Associa clique no cabeçalho de cada procedimento para abrir/fechar o conteúdo.
+ */
 function initializeProcedures() {
     const procedureHeaders = document.querySelectorAll('.procedure-header');
     
@@ -395,6 +501,11 @@ function initializeProcedures() {
     });
 }
 
+/**
+ * toggleProcedure(procedureId)
+ * - Garante que apenas um acordeão fique aberto por vez.
+ * - Roda o ícone (chevron) conforme o estado (aberto/fechado).
+ */
 function toggleProcedure(procedureId) {
     const content = document.getElementById(procedureId);
     if (!content) return;
@@ -416,11 +527,17 @@ function toggleProcedure(procedureId) {
         
         // Abrir o selecionado
         content.classList.add('active');
-        if (icon) icon.style.transform = 'rotate(180deg)';
+        if (icon) icon.style.transform = 'rotate(180deg)'; // chevron "virado" indica aberto
     }
 }
 
 // ===== FUNCIONALIDADE DE COPIAR =====
+
+/**
+ * copyToClipboard(button, text)
+ * - Tenta usar a API moderna (navigator.clipboard) quando disponível e segura (HTTPS).
+ * - Caso contrário, cai no método alternativo (fallback) com textarea oculto.
+ */
 function copyToClipboard(button, text) {
     // Usar a API moderna do clipboard se disponível
     if (navigator.clipboard && window.isSecureContext) {
@@ -434,6 +551,10 @@ function copyToClipboard(button, text) {
     }
 }
 
+/**
+ * fallbackCopyToClipboard(text, button)
+ * - Compatibilidade com navegadores antigos (document.execCommand('copy')).
+ */
 function fallbackCopyToClipboard(text, button) {
     // Método alternativo para navegadores mais antigos
     const textArea = document.createElement('textarea');
@@ -456,6 +577,10 @@ function fallbackCopyToClipboard(text, button) {
     document.body.removeChild(textArea);
 }
 
+/**
+ * showCopySuccess(button)
+ * - Feedback visual de sucesso (altera texto/ícone temporariamente).
+ */
 function showCopySuccess(button) {
     const originalText = button.innerHTML;
     button.innerHTML = '<i class="fas fa-check"></i> Copiado!';
@@ -467,6 +592,10 @@ function showCopySuccess(button) {
     }, 2000);
 }
 
+/**
+ * showCopyError(button)
+ * - Feedback visual de erro (cor vermelha temporária).
+ */
 function showCopyError(button) {
     const originalText = button.innerHTML;
     button.innerHTML = '<i class="fas fa-times"></i> Erro';
@@ -478,7 +607,11 @@ function showCopyError(button) {
     }, 2000);
 }
 
-// Função específica para copiar o template de bug
+/**
+ * copyBugTemplate(ev)
+ * - Copia o template de abertura de bug para a área de transferência.
+ * - Obtém o botão a partir do evento (sem depender de variável global).
+ */
 function copyBugTemplate(ev) {
     const template = `**Passos para reproduzir:**
 1. [Descreva o primeiro passo]
@@ -506,6 +639,15 @@ function copyBugTemplate(ev) {
 }
 
 // ===== UTILITÁRIOS =====
+
+/**
+ * debounce(func, wait)
+ * - Atraso controlado para agrupar múltiplas chamadas sucessivas em uma só.
+ * - Muito útil para inputs de busca/scroll/resize.
+ * @param {Function} func - função a ser executada
+ * @param {number} wait - tempo em ms
+ * @returns {Function} função "debounced"
+ */
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -534,9 +676,15 @@ function debounce(func, wait) {
 // });
 
 // ===== ANIMAÇÕES E EFEITOS =====
+
+/**
+ * addScrollAnimations()
+ * - Usa IntersectionObserver (EN) para adicionar classe .fade-in
+ *   quando elementos entram na área visível (viewport).
+ */
 function addScrollAnimations() {
     const observerOptions = {
-        threshold: 0.1,
+        threshold: 0.1,               // EN: threshold = limiar de interseção
         rootMargin: '0px 0px -50px 0px'
     };
     
@@ -557,6 +705,12 @@ function addScrollAnimations() {
 document.addEventListener('DOMContentLoaded', addScrollAnimations);
 
 // ===== ACESSIBILIDADE =====
+
+/**
+ * Atalhos de teclado e comportamentos de acessibilidade:
+ * - ESC: fecha o menu mobile e limpa a busca (retorna à Home).
+ * - Ctrl/Cmd + K: foca a barra de busca (atalho padrão de "comando").
+ */
 document.addEventListener('keydown', function(e) {
     // Navegação por teclado
     if (e.key === 'Escape') {
@@ -586,6 +740,11 @@ document.addEventListener('keydown', function(e) {
 });
 
 // ===== FEEDBACK VISUAL =====
+
+/**
+ * addLoadingState(element) / removeLoadingState(element)
+ * - Adiciona/remove a classe .loading para indicar estado de processamento.
+ */
 function addLoadingState(element) {
     element.classList.add('loading');
 }
@@ -595,18 +754,27 @@ function removeLoadingState(element) {
 }
 
 // ===== LOGS E DEBUG =====
+
+/**
+ * logAction(action, details)
+ * - Console logging padronizado para facilitar debug/analytics.
+ */
 function logAction(action, details = {}) {
     if (window.console && console.log) {
         console.log(`[Copa Fácil Portal] ${action}:`, details);
     }
 }
 
-// Log de navegação para analytics (se necessário)
+/**
+ * logNavigation(section)
+ * - Log específico para navegação (poderia ser enviado a analytics no futuro).
+ */
 function logNavigation(section) {
     logAction('Navegação', { section, timestamp: new Date().toISOString() });
 }
 
 // Interceptar navegação para logs
+// OBS: Mantém a função original em uma constante e "decoramos" com log antes de chamar.
 const originalNavigateToSection = navigateToSection;
 navigateToSection = function(sectionId) {
     logNavigation(sectionId);

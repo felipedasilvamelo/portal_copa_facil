@@ -1,4 +1,13 @@
 /* css/styles.css */
+
+/* =========================================================
+   RESET E TOKENS DE DESIGN
+   ---------------------------------------------------------
+   Mantém o reset e as variáveis (tokens) centralizadas.
+   Nomes em inglês mantidos por padrão de mercado; comento
+   o equivalente em PT-BR nas principais.
+   ========================================================= */
+
 /* Reset e configurações básicas */
 * {
     margin: 0;
@@ -8,42 +17,43 @@
 
 :root {
     /* Cores da marca Copa Fácil */
-    --primary-color: #384355;
-    --accent-color: #50EA95;
-    --background-color: #f8fafc;
-    --white: #ffffff;
-    --text-primary: #1e293b;
-    --text-secondary: #64748b;
-    --border-color: #e2e8f0;
-    --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.1);
-    --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.1);
-    --shadow-heavy: 0 10px 25px rgba(0, 0, 0, 0.15);
+    --primary-color: #384355;        /* cor primária */
+    --accent-color: #50EA95;         /* cor de destaque/acento */
+    --background-color: #f8fafc;     /* cor de fundo */
+    --white: #ffffff;                /* branco */
+    --text-primary: #1e293b;         /* texto principal */
+    --text-secondary: #64748b;       /* texto secundário */
+    --border-color: #e2e8f0;         /* cor de borda */
+    --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.1);   /* sombra leve */
+    --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.1);  /* sombra média */
+    --shadow-heavy: 0 10px 25px rgba(0, 0, 0, 0.15);/* sombra forte */
     
     /* Tipografia */
-    --font-family: 'Inter', 'Arial', sans-serif;
-    --font-size-xs: 0.75rem;
-    --font-size-sm: 0.875rem;
-    --font-size-base: 1rem;
-    --font-size-lg: 1.125rem;
-    --font-size-xl: 1.25rem;
-    --font-size-2xl: 1.5rem;
-    --font-size-3xl: 1.875rem;
-    --font-size-4xl: 2.25rem;
+    --font-family: 'Inter', 'Arial', sans-serif; /* família tipográfica */
+    --font-size-xs: 0.75rem;   /* muito pequeno */
+    --font-size-sm: 0.875rem;  /* pequeno */
+    --font-size-base: 1rem;    /* base/padrão */
+    --font-size-lg: 1.125rem;  /* grande */
+    --font-size-xl: 1.25rem;   /* extra grande */
+    --font-size-2xl: 1.5rem;   /* 2x extra grande */
+    --font-size-3xl: 1.875rem; /* 3x extra grande */
+    --font-size-4xl: 2.25rem;  /* 4x extra grande */
     
     /* Espaçamentos */
-    --spacing-xs: 0.25rem;
-    --spacing-sm: 0.5rem;
-    --spacing-md: 1rem;
-    --spacing-lg: 1.5rem;
-    --spacing-xl: 2rem;
-    --spacing-2xl: 3rem;
+    --spacing-xs: 0.25rem;   /* espaçamento xs */
+    --spacing-sm: 0.5rem;    /* espaçamento sm */
+    --spacing-md: 1rem;      /* espaçamento md */
+    --spacing-lg: 1.5rem;    /* espaçamento lg */
+    --spacing-xl: 2rem;      /* espaçamento xl */
+    --spacing-2xl: 3rem;     /* espaçamento 2xl */
     
-    /* Transições */
-    --transition-fast: 0.15s ease-in-out;
-    --transition-normal: 0.3s ease-in-out;
-    --transition-slow: 0.5s ease-in-out;
+    /* Transições (timings) */
+    --transition-fast: 0.15s ease-in-out;   /* rápido */
+    --transition-normal: 0.3s ease-in-out;  /* normal */
+    --transition-slow: 0.5s ease-in-out;    /* lento */
 }
 
+/* Base de texto e cor de fundo do documento */
 body {
     font-family: var(--font-family);
     background-color: var(--background-color);
@@ -52,24 +62,34 @@ body {
     font-size: var(--font-size-base);
 }
 
+/* .container (contêiner): centraliza e limita a largura do conteúdo */
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--spacing-md);
 }
 
-/* Header */
+/* =========================================================
+   HEADER (cabeçalho)
+   ---------------------------------------------------------
+   .header: faixa superior com gradiente e título.
+   .header-content: centraliza o conteúdo do header.
+   .logo: agrupamento do símbolo + título.
+   .tagline: subtítulo/slogan abaixo do título.
+   ========================================================= */
+
 .header {
-    background: linear-gradient(135deg, var(--primary-color) 0%, #2d3748 100%);
+    background: linear-gradient(135deg, var(--primary-color) 0%, #2d3748 100%); /* gradiente do cabeçalho */
     color: var(--white);
     padding: var(--spacing-xl) 0;
     box-shadow: var(--shadow-medium);
 }
 
 .header-content {
-    text-align: center;
+    text-align: center; /* centraliza logo + texto */
 }
 
+/* .logo (logotipo/link para home) */
 .logo {
     display: flex;
     align-items: center;
@@ -89,6 +109,7 @@ body {
     margin: 0;
 }
 
+/* .tagline (slogan): linha de apoio sob o título */
 .tagline {
     font-size: var(--font-size-lg);
     opacity: 0.9;
@@ -96,25 +117,38 @@ body {
     margin: 0;
 }
 
-/* Layout principal */
+/* =========================================================
+   LAYOUT PRINCIPAL
+   ---------------------------------------------------------
+   .main: espaçamento vertical da área principal.
+   .layout: grid flexível com sidebar + conteúdo.
+   ========================================================= */
+
 .main {
     padding: var(--spacing-xl) 0;
 }
 
+/* .layout (layout): flex com gap entre sidebar e conteúdo */
 .layout {
     display: flex;
     gap: var(--spacing-xl);
     align-items: flex-start;
 }
 
-/* Sidebar */
+/* =========================================================
+   SIDEBAR (barra lateral de navegação)
+   ---------------------------------------------------------
+   .sidebar: navegação fixa no desktop.
+   .nav-link: link de navegação; .active = link ativo.
+   ========================================================= */
+
 .sidebar {
     width: 250px;
     background: var(--white);
     border-radius: 12px;
     padding: var(--spacing-lg);
     box-shadow: var(--shadow-light);
-    position: sticky;
+    position: sticky;              /* fixa ao rolar (desktop) */
     top: var(--spacing-xl);
     display: none; /* Oculto no mobile por padrão */
 }
@@ -136,6 +170,7 @@ body {
     margin-bottom: var(--spacing-xs);
 }
 
+/* .nav-link (link de navegação) */
 .nav-link {
     display: block;
     padding: var(--spacing-sm) var(--spacing-md);
@@ -146,6 +181,7 @@ body {
     font-weight: 500;
 }
 
+/* :hover / .active (ativo) destacam o item */
 .nav-link:hover,
 .nav-link.active {
     background-color: var(--accent-color);
@@ -153,13 +189,19 @@ body {
     transform: translateX(4px);
 }
 
-/* Content area */
+/* =========================================================
+   CONTENT AREA (área de conteúdo)
+   ---------------------------------------------------------
+   .content: coluna principal com as seções.
+   .section: cada página/aba; .active = visível.
+   ========================================================= */
+
 .content {
-    flex: 1;
-    min-width: 0;
+    flex: 1;        /* ocupa o restante do espaço */
+    min-width: 0;   /* evita overflow com flex */
 }
 
-/* Seções */
+/* .section (seção): cartão com borda/sombra; oculta por padrão */
 .section {
     display: none;
     background: var(--white);
@@ -169,16 +211,19 @@ body {
     margin-bottom: var(--spacing-xl);
 }
 
+/* .section.active (ativa): exibe e anima a entrada */
 .section.active {
     display: block;
     animation: fadeIn 0.3s ease-in-out;
 }
 
+/* @keyframes fadeIn (animação de aparição) */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* Título principal das seções */
 .section h2 {
     color: var(--primary-color);
     font-size: var(--font-size-3xl);
@@ -188,7 +233,15 @@ body {
     border-bottom: 3px solid var(--accent-color);
 }
 
-/* ===== Busca Global ===== */
+/* =========================================================
+   GLOBAL SEARCH (busca global)
+   ---------------------------------------------------------
+   .global-search: bloco fixo no topo do conteúdo.
+   .search-box: input com ícone.
+   .search-results-section: painel com resultados.
+   .search-result-btn: botão "ver detalhes".
+   ========================================================= */
+
 .global-search {
     margin-bottom: var(--spacing-xl);
 }
@@ -197,6 +250,7 @@ body {
     margin-bottom: var(--spacing-lg);
 }
 
+/* .search-box (caixa de busca): posiciona ícone no input */
 .search-box {
     position: relative;
     max-width: 700px; /* um pouco mais larga no topo global */
@@ -212,11 +266,12 @@ body {
     font-size: var(--font-size-lg);
 }
 
+/* #searchInput (campo de busca) */
 #searchInput {
     width: 100%;
-    padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) 3rem;
+    padding: var(--spacing-md) var(--spacing-md) var(--spacing-md) 3rem; /* espaço para o ícone */
     border: 2px solid var(--border-color);
-    border-radius: 50px;
+    border-radius: 50px; /* estilo pílula */
     font-size: var(--font-size-base);
     transition: all var(--transition-normal);
     background: var(--white);
@@ -246,6 +301,7 @@ body {
     border-bottom: 3px solid var(--accent-color);
 }
 
+/* .search-result-btn (botão de resultado) */
 .search-result-btn {
     background: var(--primary-color);
     color: var(--white);
@@ -265,7 +321,15 @@ body {
     transform: scale(1.03);
 }
 
-/* Cards grid */
+/* =========================================================
+   HOME CARDS (atalhos)
+   ---------------------------------------------------------
+   .cards-grid: grade responsiva.
+   .card: cartão clicável.
+   .card-icon: círculo com ícone.
+   .card-btn: botão "Acessar".
+   ========================================================= */
+
 .cards-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -273,6 +337,7 @@ body {
     margin-bottom: var(--spacing-2xl);
 }
 
+/* .card (cartão): bloco clicável com sombra */
 .card {
     background: var(--white);
     border-radius: 16px;
@@ -290,6 +355,7 @@ body {
     border-color: var(--accent-color);
 }
 
+/* .card-icon (ícone do cartão) */
 .card-icon {
     width: 80px;
     height: 80px;
@@ -319,6 +385,7 @@ body {
     line-height: 1.5;
 }
 
+/* .card-btn (botão do cartão) */
 .card-btn {
     background: var(--primary-color);
     color: var(--white);
@@ -337,7 +404,12 @@ body {
     transform: scale(1.05);
 }
 
-/* Info box */
+/* =========================================================
+   INFO BOX (caixa informativa)
+   ---------------------------------------------------------
+   .info-box: destaque com gradiente para instruções.
+   ========================================================= */
+
 .info-box {
     background: linear-gradient(135deg, var(--accent-color), #3dd68c);
     color: var(--primary-color);
@@ -352,7 +424,12 @@ body {
     margin-bottom: var(--spacing-md);
 }
 
-/* Regras de ouro */
+/* =========================================================
+   REGRAS DE OURO (grid de princípios)
+   ---------------------------------------------------------
+   .rules-container / .rules-grid / .rule-item.
+   ========================================================= */
+
 .rules-container h3 {
     color: var(--primary-color);
     font-size: var(--font-size-xl);
@@ -366,6 +443,7 @@ body {
     gap: var(--spacing-lg);
 }
 
+/* .rule-item (item de regra) */
 .rule-item {
     background: var(--white);
     padding: var(--spacing-lg);
@@ -398,7 +476,18 @@ body {
     font-size: var(--font-size-sm);
 }
 
-/* Procedimentos */
+/* =========================================================
+   PROCEDURES (acordeões de procedimentos)
+   ---------------------------------------------------------
+   .procedures-container: lista de itens.
+   .procedure-item: cartão do acordeão.
+   .procedure-header: cabeçalho clicável.
+   .procedure-content: corpo do acordeão (abre/fecha).
+   .procedure-section: blocos internos.
+   .message-box: caixa de mensagem (exemplo de texto).
+   .procedure-footer: rodapé com meta-infos.
+   ========================================================= */
+
 .procedures-container {
     /* Espaçamento vertical entre itens (substitui a antiga 'space-y') */
     display: grid;
@@ -406,6 +495,7 @@ body {
     gap: var(--spacing-lg);
 }
 
+/* .procedure-item (item de procedimento) */
 .procedure-item {
     background: var(--white);
     border: 2px solid var(--border-color);
@@ -420,6 +510,7 @@ body {
     box-shadow: var(--shadow-medium);
 }
 
+/* .procedure-header (cabeçalho do acordeão) */
 .procedure-header {
     background: var(--primary-color);
     color: var(--white);
@@ -446,22 +537,26 @@ body {
     transition: transform var(--transition-fast);
 }
 
+/* .procedure-content (corpo do acordeão): oculto por padrão */
 .procedure-content {
     display: none;
     padding: var(--spacing-xl);
     background: var(--background-color);
 }
 
+/* .procedure-content.active (aberto): exibe com animação */
 .procedure-content.active {
     display: block;
     animation: slideDown 0.3s ease-out;
 }
 
+/* @keyframes slideDown (animação de abertura) */
 @keyframes slideDown {
     from { opacity: 0; max-height: 0; }
     to { opacity: 1; max-height: 1000px; }
 }
 
+/* .procedure-section (subblocos internos) */
 .procedure-section {
     margin-bottom: var(--spacing-lg);
 }
@@ -494,6 +589,7 @@ body {
     margin-bottom: var(--spacing-sm);
 }
 
+/* .message-box (caixa de mensagem pronta) */
 .message-box {
     background: var(--accent-color);
     color: var(--primary-color);
@@ -503,6 +599,7 @@ body {
     border-left: 4px solid var(--primary-color);
 }
 
+/* .procedure-footer (rodapé do procedimento) */
 .procedure-footer {
     background: var(--white);
     padding: var(--spacing-md);
@@ -511,14 +608,21 @@ body {
     color: var(--text-secondary);
 }
 
+/* =========================================================
+   QUICK RESPONSES (respostas rápidas)
+   ---------------------------------------------------------
+   .quick-responses: grade de respostas.
+   .response-item: cartão da resposta.
+   .response-content: corpo do texto.
+   .copy-btn: botão de copiar (feedback visual).
+   ========================================================= */
 
-
-/* Respostas rápidas */
 .quick-responses {
     display: grid;
     gap: var(--spacing-lg);
 }
 
+/* .response-item (item de resposta rápida) */
 .response-item {
     background: var(--white);
     border: 2px solid var(--border-color);
@@ -539,6 +643,7 @@ body {
     margin-bottom: var(--spacing-md);
 }
 
+/* .response-content (conteúdo da resposta) */
 .response-content {
     background: var(--background-color);
     padding: var(--spacing-lg);
@@ -553,6 +658,7 @@ body {
     line-height: 1.6;
 }
 
+/* .copy-btn (botão copiar) */
 .copy-btn {
     background: var(--accent-color);
     color: var(--primary-color);
@@ -575,16 +681,25 @@ body {
 }
 
 .copy-btn.copied {
-    background: #22c55e;
+    background: #22c55e; /* verde de sucesso */
     color: var(--white);
 }
 
-/* Modelos e formulários */
+/* =========================================================
+   MODELOS & FORMULÁRIOS
+   ---------------------------------------------------------
+   .models-container: grade.
+   .model-item: cartão com links/modelos.
+   .links-list / .link-item: lista de links úteis.
+   .bug-template / .template-content: bloco do template.
+   ========================================================= */
+
 .models-container {
     display: grid;
     gap: var(--spacing-xl);
 }
 
+/* .model-item (cartão de modelos) */
 .model-item {
     background: var(--white);
     border: 2px solid var(--border-color);
@@ -599,12 +714,14 @@ body {
     margin-bottom: var(--spacing-lg);
 }
 
+/* .links-list (lista de links) */
 .links-list {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-md);
 }
 
+/* .link-item (item de link) */
 .link-item {
     display: flex;
     align-items: center;
@@ -625,6 +742,7 @@ body {
     transform: translateX(4px);
 }
 
+/* .bug-template (bloco do template de bug) */
 .bug-template h4 {
     color: var(--primary-color);
     font-size: var(--font-size-lg);
@@ -632,6 +750,7 @@ body {
     margin-bottom: var(--spacing-md);
 }
 
+/* .template-content (conteúdo do template) */
 .template-content {
     background: var(--background-color);
     padding: var(--spacing-lg);
@@ -643,12 +762,21 @@ body {
     line-height: 1.6;
 }
 
-/* Changelog */
+/* =========================================================
+   CHANGELOG (linha do tempo)
+   ---------------------------------------------------------
+   .changelog-container: grade.
+   .changelog-item: cartão com barra lateral.
+   .changelog-date: selo de data.
+   .changelog-content: textos.
+   ========================================================= */
+
 .changelog-container {
     display: grid;
     gap: var(--spacing-lg);
 }
 
+/* .changelog-item (item de changelog) */
 .changelog-item {
     display: flex;
     gap: var(--spacing-lg);
@@ -664,6 +792,7 @@ body {
     transform: translateX(4px);
 }
 
+/* .changelog-date (pílula de data) */
 .changelog-date {
     background: var(--primary-color);
     color: var(--white);
@@ -675,6 +804,7 @@ body {
     height: fit-content;
 }
 
+/* .changelog-content (bloco de textos) */
 .changelog-content h4 {
     color: var(--primary-color);
     font-size: var(--font-size-lg);
@@ -688,7 +818,13 @@ body {
     line-height: 1.5;
 }
 
-/* Mobile menu toggle */
+/* =========================================================
+   MOBILE MENU TOGGLE (botão hambúrguer)
+   ---------------------------------------------------------
+   .mobile-menu-toggle: botão flutuante para abrir a sidebar
+   no mobile. Visível somente em telas pequenas.
+   ========================================================= */
+
 .mobile-menu-toggle {
     position: fixed;
     top: var(--spacing-lg);
@@ -703,7 +839,7 @@ body {
     cursor: pointer;
     box-shadow: var(--shadow-medium);
     z-index: 1000;
-    display: none;
+    display: none; /* oculto por padrão (desktop) */
     transition: all var(--transition-fast);
 }
 
@@ -713,7 +849,13 @@ body {
     transform: scale(1.1);
 }
 
-/* Responsividade */
+/* =========================================================
+   RESPONSIVIDADE
+   ---------------------------------------------------------
+   @media (max-width: 768px): ajustes para mobile.
+   @media (min-width: 769px): garante sidebar visível.
+   ========================================================= */
+
 @media (max-width: 768px) {
     .container {
         padding: 0 var(--spacing-sm);
@@ -742,6 +884,7 @@ body {
         gap: var(--spacing-lg);
     }
     
+    /* .sidebar (mobile): vira drawer deslizante */
     .sidebar {
         position: fixed;
         top: 0;
@@ -755,7 +898,7 @@ body {
         padding-top: 80px;
     }
     
-    .sidebar.active {
+    .sidebar.active { /* quando aberta */
         left: 0;
         display: block;
     }
@@ -795,11 +938,18 @@ body {
 
 @media (min-width: 769px) {
     .sidebar {
-        display: block;
+        display: block; /* exibe sidebar no desktop */
     }
 }
 
-/* Utilitários */
+/* =========================================================
+   UTILITÁRIOS
+   ---------------------------------------------------------
+   .hidden: força ocultar elementos (importante).
+   .fade-in: aplica animação de entrada.
+   .loading: estado de carregamento (desabilita interações).
+   ========================================================= */
+
 .hidden {
     display: none !important;
 }
@@ -808,13 +958,17 @@ body {
     animation: fadeIn 0.3s ease-in-out;
 }
 
-/* Estados de loading */
 .loading {
     opacity: 0.6;
     pointer-events: none;
 }
 
-/* Scrollbar personalizada */
+/* =========================================================
+   SCROLLBAR PERSONALIZADA (WebKit)
+   ---------------------------------------------------------
+   Estiliza barra de rolagem em navegadores baseados em WebKit.
+   ========================================================= */
+
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -832,8 +986,16 @@ body {
     background: var(--primary-color);
 }
 
-/* Logo da marca no cabeçalho */
-.logo { text-decoration: none; color: inherit; } /* link sem cara de link */
+/* =========================================================
+   LOGO DA MARCA NO CABEÇALHO
+   ---------------------------------------------------------
+   .logo (link sem aparência de link).
+   .brand-logo (imagem circular limpa).
+   ========================================================= */
+
+/* link sem cara de link */
+.logo { text-decoration: none; color: inherit; }
+
 .logo .brand-logo{
   width: 56px;
   height: 56px;
@@ -850,7 +1012,14 @@ body {
   .logo .brand-logo{ width: 48px; height: 48px; }
 }
 
-/* Financeiro */
+/* =========================================================
+   FINANCEIRO (blocos legados/preservados)
+   ---------------------------------------------------------
+   Mantidos mesmo usando o acordeão padrão para evitar
+   regressões visuais em conteúdos antigos.
+   .finance-container / .finance-item / .finance-content
+   ========================================================= */
+
 /* Mantido (mesmo que o Financeiro agora use o acordeão de .procedure-*)
    para preservar suas alterações prévias e evitar regressões visuais */
 .finance-container {
@@ -858,6 +1027,7 @@ body {
   gap: var(--spacing-lg);
 }
 
+/* .finance-item (cartão financeiro) */
 .finance-item {
   background: var(--white);
   border: 2px solid var(--border-color);
@@ -878,6 +1048,7 @@ body {
   margin-bottom: var(--spacing-md);
 }
 
+/* .finance-content (corpo do item financeiro) */
 .finance-content {
   background: var(--background-color);
   padding: var(--spacing-lg);
