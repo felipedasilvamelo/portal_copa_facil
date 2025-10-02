@@ -87,13 +87,13 @@ function initializeSearch() {
     const searchInput = document.getElementById('searchInput');
     if (!searchInput) return;
 
-    // ✅ Prevenção contra registros duplicados
+    //  Prevenção contra registros duplicados
     if (searchInput.dataset.initialized === '1') return;
     searchInput.dataset.initialized = '1';
 
     const MIN_SEARCH_CHARS = 2; // mínimo de caracteres para iniciar a busca
 
-    // ✅ Um único listener, com debounce + limite mínimo de caracteres
+    //  Um único listener, com debounce + limite mínimo de caracteres
     const onInput = debounce((ev) => {
         const value = (ev.target.value || '').toLowerCase().trim();
 
@@ -122,7 +122,7 @@ function performSearch(searchTerm) {
     }
     
     const searchResults = [];
-    const seen = new WeakSet(); // ✅ evita itens duplicados (ex.: finance-item + procedure-item)
+    const seen = new WeakSet(); //  evita itens duplicados (ex.: finance-item + procedure-item)
 
     // addResult: adiciona resultado sem duplicar o mesmo elemento
     function addResult(element, obj) {
@@ -155,7 +155,7 @@ function performSearch(searchTerm) {
         }
     });
     
-    // Buscar em financeiro ✅ (mantido por compatibilidade; não duplica por causa do WeakSet)
+    // Buscar em financeiro  (mantido por compatibilidade; não duplica por causa do WeakSet)
     const finances = document.querySelectorAll('.finance-item');
     finances.forEach(fin => {
         const titleEl = fin.querySelector('h3');
@@ -249,7 +249,7 @@ function displaySearchResults(results) {
  * - Limpa a lista anterior para reaproveitar o painel.
  */
 function createSearchResultsContainer() {
-    // ✅ Agora o painel é global e fixo no topo do conteúdo (HTML já inclui #global-results)
+    //  Agora o painel é global e fixo no topo do conteúdo (HTML já inclui #global-results)
     const container = document.getElementById('global-results');
     if (!container) return document.createElement('div');
 
@@ -266,7 +266,7 @@ function createSearchResultsContainer() {
  * - Usa encodeURIComponent para gerar um identificador seguro (EN: safe identifier).
  */
 function createSearchResultItem(result) {
-    // ✅ Gera identificador seguro para inline attribute (usa encodeURIComponent)
+    //  Gera identificador seguro para inline attribute (usa encodeURIComponent)
     const identifierRaw = result.element.id || (result.element.querySelector('h3, h4')?.textContent || '');
     const identifierSafe = encodeURIComponent(identifierRaw);
 
@@ -312,7 +312,7 @@ function createSearchResultItem(result) {
 function getSectionName(sectionId) {
     const sectionNames = {
         'procedimentos': 'Procedimentos',
-        'financeiro': 'Financeiro',               // ✅ mapeado
+        'financeiro': 'Financeiro',               //  mapeado
         'respostas-rapidas': 'Respostas Rápidas',
         'modelos-formularios': 'Modelos & Formulários',
         'changelog': 'Changelog'
@@ -326,7 +326,7 @@ function getSectionName(sectionId) {
  * - Mantém a barra de busca visível.
  */
 function goToSearchResult(section, itemIdentifier) {
-    // ✅ Mantém a barra de busca visível; apenas navega para a seção e destaca o item
+    //  Mantém a barra de busca visível; apenas navega para a seção e destaca o item
     navigateToSection(section);
     
     setTimeout(() => {
@@ -358,7 +358,7 @@ function findElementByIdentifier(section, identifier) {
     const titles = sectionElement.querySelectorAll('h3, h4');
     for (let title of titles) {
         if (identifier && title.textContent.includes(identifier)) {
-            return title.closest('.procedure-item, .response-item, .finance-item, .changelog-item'); // ✅ inclui finance-item
+            return title.closest('.procedure-item, .response-item, .finance-item, .changelog-item'); //  inclui finance-item
         }
     }
     
@@ -633,7 +633,7 @@ function copyBugTemplate(ev) {
 **Prints/evidências:**
 [Anexar capturas de tela ou vídeos]`;
 
-    // ✅ não depende mais de event global
+    //  não depende mais de event global
     const button = ev?.currentTarget || ev?.target || document.activeElement;
     copyToClipboard(button, template);
 }
@@ -661,7 +661,7 @@ function debounce(func, wait) {
 }
 
 // Aplicar debounce na busca para melhor performance
-// (✅ Agora o debounce já é aplicado dentro de initializeSearch; este bloco não é mais necessário.)
+// ( Agora o debounce já é aplicado dentro de initializeSearch; este bloco não é mais necessário.)
 // document.addEventListener('DOMContentLoaded', function() {
 //     const searchInput = document.getElementById('searchInput');
 //     if (searchInput) {
@@ -697,7 +697,7 @@ function addScrollAnimations() {
     }, observerOptions);
     
     // Observar elementos que devem ter animação
-    const animatedElements = document.querySelectorAll('.card, .rule-item, .procedure-item, .response-item, .finance-item, .changelog-item'); // ✅ inclui finance-item
+    const animatedElements = document.querySelectorAll('.card, .rule-item, .procedure-item, .response-item, .finance-item, .changelog-item'); //  inclui finance-item
     animatedElements.forEach(el => observer.observe(el));
 }
 
