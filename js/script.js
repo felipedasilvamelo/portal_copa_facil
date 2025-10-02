@@ -81,7 +81,7 @@ function navigateToSection(sectionId) {
  * initializeSearch()
  * - Seleciona a barra de busca global.
  * - Garante inicialização única (dataset.initialized).
- * - Aplica debounce (EN: "antirruído" / atrasar execução) para reduzir chamadas.
+ * - Aplica debounce (EN: "antirruído" / atrasar execução) para reduzir chamadas...
  */
 function initializeSearch() {
     const searchInput = document.getElementById('searchInput');
